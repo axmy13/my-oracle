@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <
+        charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY-ORACLE | 数字频率感应</title>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;600&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
@@ -63,41 +64,13 @@
         input::placeholder { color: rgba(209, 167, 93, 0.2); font-size: 2rem; letter-spacing: 2px; }
 
         .hint { font-size: 0.75rem; color: var(--subtext); letter-spacing: 1px; }
+    <meta property="og:title" content="MY-ORACLE | 赛博灵数感应实验室 🔮" />
+    <meta property="og:description" content="不问生日，只感应此刻频率。纯净、无痕、灵动。" />
+    <meta property="og:image" content="https://axmy13.github.io/my-oracle/og-image.jpg" />
+    <meta property="og:url" content="https://axmy13.github.io/my-oracle/" />
 
-        button {
-            margin-top: 50px; background: transparent; border: 1px solid var(--gold);
-            color: var(--gold); padding: 12px 40px; border-radius: 2px;
-            font-size: 0.8rem; letter-spacing: 3px; cursor: pointer;
-            transition: all 0.4s; font-weight: 400;
-        }
+    <link rel="icon" type="image/png" href="https://axmy13.github.io/my-oracle/icon.png">
 
-        button:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(209, 167, 93, 0.4); }
-
-        /* 结果展示卡片 */
-        #result-view { display: none; opacity: 0; transform: translateY(20px); }
-
-        .result-card {
-            background: var(--card-bg); padding: 50px 30px; border-radius: 4px;
-            border: 1px solid rgba(209, 167, 93, 0.1); backdrop-filter: blur(15px);
-        }
-
-        .res-num { font-size: 6rem; font-weight: 200; color: var(--gold); margin: 10px 0; font-family: 'Inter', sans-serif; }
-        
-        .res-title { font-family: 'Crimson Pro', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; letter-spacing: 2px; }
-
-        .res-desc { line-height: 1.8; color: var(--text); font-size: 0.95rem; font-weight: 300; margin-bottom: 30px; text-align: justify; }
-
-        .res-action { font-size: 0.85rem; color: var(--gold); border-top: 1px solid rgba(209, 167, 93, 0.1); padding-top: 20px; font-style: italic; }
-
-        /* 加载动画 */
-        .loading-animation { display: none; margin: 50px auto; }
-        .spinner { width: 40px; height: 40px; border: 1px solid var(--gold); animation: rotate 2s linear infinite; }
-
-        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        footer { position: fixed; bottom: 30px; font-size: 0.65rem; color: #4B5563; letter-spacing: 1px; width: 100%; text-align: center; }
-
-    </style>
 </head>
 <body>
 
