@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY-ORACLE | 数字频率感应</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;600&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070A;
+            --card-bg: rgba(15, 18, 24, 0.8);
+            --gold: #D1A75D;
+            --text: #E8E8E8;
+            --subtext: #9CA3AF;
+            --accent-glow: rgba(209, 167, 93, 0.15);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0; background: var(--bg); color: var(--text);
+            font-family: 'Inter', sans-serif; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background-image: radial-gradient(circle at 50% 50%, #11141b 0%, #05070a 100%);
+        }
+
+        /* 极简容器 */
+        .container {
+            width: 100%; max-width: 450px; padding: 40px 20px;
+            text-align: center; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif; font-weight: 300;
+            font-size: 2.2rem; letter-spacing: 6px; margin: 0;
+            color: var(--gold); text-transform: uppercase;
+        }
+
+        .motto {
+            font-size: 0.85rem; letter-spacing: 4px; color: var(--subtext);
+            margin-top: 10px; margin-bottom: 60px; font-weight: 200;
+        }
+
+        /* 交互圆环 */
+        .oracle-circle {
+            width: 280px; height: 280px; margin: 0 auto;
+            border: 1px solid rgba(209, 167, 93, 0.2); border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; position: relative;
+            box-shadow: 0 0 40px var(--accent-glow);
+            transition: transform 0.5s ease;
+        }
+
+        .oracle-circle:hover { transform: scale(1.02); border-color: rgba(209, 167, 93, 0.4); }
+
+        input {
+            background: transparent; border: none; border-bottom: 1px solid var(--gold);
+            color: var(--gold); font-size: 3.5rem; width: 140px; text-align: center;
+            outline: none; font-family: 'Inter', sans-serif; font-weight: 200;
+            letter-spacing: 8px; margin-bottom: 10px;
+        }
+
+        input::placeholder { color: rgba(209, 167, 93, 0.2); font-size: 2rem; letter-spacing: 2px; }
+
+        .hint { font-size: 0.75rem; color: var(--subtext); letter-spacing: 1px; }
+
+        button {
+            margin-top: 50px; background: transparent; border: 1px solid var(--gold);
+            color: var(--gold); padding: 12px 40px; border-radius: 2px;
+            font-size: 0.8rem; letter-spacing: 3px; cursor: pointer;
+            transition: all 0.4s; font-weight: 400;
+        }
+
+        button:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(209, 167, 93, 0.4); }
+
+        /* 结果展示卡片 */
+        #result-view { display: none; opacity: 0; transform: translateY(20px); }
+
+        .result-card {
+            background: var(--card-bg); padding: 50px 30px; border-radius: 4px;
+            border: 1px solid rgba(209, 167, 93, 0.1); backdrop-filter: blur(15px);
+        }
+
+        .res-num { font-size: 6rem; font-weight: 200; color: var(--gold); margin: 10px 0; font-family: 'Inter', sans-serif; }
+        
+        .res-title { font-family: 'Crimson Pro', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; letter-spacing: 2px; }
+
+        .res-desc { line-height: 1.8; color: var(--text); font-size: 0.95rem; font-weight: 300; margin-bottom: 30px; text-align: justify; }
+
+        .res-action { font-size: 0.85rem; color: var(--gold); border-top: 1px solid rgba(209, 167, 93, 0.1); padding-top: 20px; font-style: italic; }
+
+        /* 加载动画 */
+        .loading-animation { display: none; margin: 50px auto; }
+        .spinner { width: 40px; height: 40px; border: 1px solid var(--gold); animation: rotate 2s linear infinite; }
+
+        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        footer { position: fixed; bottom: 30px; font-size: 0.65rem; color: #4B5563; letter-spacing: 1px; width: 100%; text-align: center; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div id="input-view">
+            <h1>MY-ORACLE</h1>
+            <div class="motto">此时此刻 · 即是唯一</div>
+            
+            <div class="oracle-circle">
+                <input type="text" id="numInput" maxlength="3" placeholder="---" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                <div class="hint">输入此刻意识到的三位数</div>
+            </div>
+
+            <button onclick="decode()">解码能量</button>
+        </div>
+
+        <div id="loading-view" class="loading-animation">
+            <div class="spinner"></div>
+            <p style="margin-top:20px; font-size:0.7rem; letter-spacing:3px; color:var(--gold);">调律数字频率中...</p>
+        </div>
+
+        <div id="result-view">
+            <div class="result-card">
+                <div class="res-title">— 能量格局 —</div>
+                <div class="res-num" id="resNum">0</div>
+                <div class="res-desc" id="resDesc"></div>
+                <div class="res-action" id="resAction"></div>
+                <button onclick="location.reload()" style="margin-top:40px; font-size:0.7rem;">重新感应</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>本工具基于本地逻辑运算 · 零数据上传 · 保护隐私</footer>
+
+    <script>
+        function decode() {
+            const input = document.getElementById('numInput').value;
+            if (input.length < 1) return;
+
+            // 切换视图
+            document.getElementById('input-view').style.display = 'none';
+            document.getElementById('loading-view').style.display = 'block';
+
+            // 模拟计算过程
+            setTimeout(() => {
+                document.getElementById('loading-view').style.display = 'none';
+                const resultView = document.getElementById('result-view');
+                resultView.style.display = 'block';
+                setTimeout(() => { resultView.style.opacity = '1'; resultView.style.transform = 'translateY(0)'; }, 50);
+
+                // 核心灵数算法 (Reduced Root)
+                let n = input.split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+                while (n > 9) n = n.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+                if (n === 0) n = 9;
+
+                const library = {
+                    1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意志。不要依赖他人的建议，你直觉里的第一个念头就是答案。", action: "建议：今日尝试一件从未做过的小事。" },
+                    2: { title: "协调者 (The Balance)", desc: "此时此刻，‘等待’比‘行动’更有力量。能量场显示你需要通过合作或聆听来获取信息，平衡感是你最强大的武器。", action: "建议：今日多听少说，观察细节里的美。" },
+                    3: { title: "表达者 (The Creative)", desc: "灵感正在你周围汇聚。这是一个向外输出能量的好时机。无论是文字、图像还是交谈，你的表达将具有极强的感染力。", action: "建议：记录下你刚刚闪过的那个念头。" },
+                    4: { title: "构建者 (The Structure)", desc: "能量趋于稳固。现在不是冒险的时机，而是整理与归纳的时刻。通过理顺周围的物理空间，你的思维会变得异常清晰。", action: "建议：花10分钟整理你的桌面或手机桌面。" },
+                    5: { title: "探索者 (The Catalyst)", desc: "不确定性是这一刻的主题。能量场在剧烈波动，这意味着机会藏在变化之中。保持好奇心，不要抗拒突如其来的邀约。", action: "建议：走一条平时不常走的路回家。" },
+                    6: { title: "守护者 (The Harmony)", desc: "温和而强大的治愈能量正包围着你。适合处理人际关系或关怀自身。你的直觉会引导你走向最和谐的选择。", action: "建议：给远方的朋友发个简单的问候。" },
+                    7: { title: "深思者 (The Seeker)", desc: "外在世界是喧嚣的，但你的内在异常清澈。能量场鼓励你向内求索。此时最适合独自待着，进行深度思考或研究。", action: "建议：关闭手机通知，静坐5分钟。" },
+                    8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是最高效的处理时刻。果断决策，会有意想不到的收获。", action: "建议：处理掉那件你拖延最久的事情。" },
+                    9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲惫，但这是升华的前奏。学会放下不再适合你的旧物，为下一阶段腾出空间。", action: "建议：清理掉一件不再使用的旧物。" }
+                };
+
+                document.getElementById('resNum').innerText = n;
+                document.getElementById('resDesc').innerText = library[n].desc;
+                document.getElementById('resAction').innerText = library[n].action;
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
