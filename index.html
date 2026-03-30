@@ -1,10 +1,84 @@
-    <input type="text" id="numInput" placeholder="输入任意数字或此时念头" />
 
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MY-ORACLE | 数字频率感应</title>
+    <meta property="og:image" content="https://axmy13.github.io/my-oracle/og-image.png" />
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; }
+        body { 
+            margin: 0; background: var(--bg); color: var(--text); 
+            font-family: sans-serif; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center; padding: 20px;
+        }
+        .container { 
+            width: 100%; max-width: 400px; text-align: center; 
+            background: rgba(15, 18, 24, 0.9); padding: 40px 24px; 
+            border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); 
+        }
+        img { width: 80px; height: 80px; margin-bottom: 20px; }
+        h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.4rem; }
+        input { 
+            width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; 
+            padding: 16px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 20px; 
+        }
+        .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        button { 
+            background: var(--gold); color: #000; border: none; padding: 16px; 
+            border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        #result { 
+            margin-top: 30px; display: none; text-align: left; 
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; 
+        }
+        .res-num { color: var(--gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="icon.png" alt="Logo">
+    <h1>MY ORACLE</h1>
+    <input type="text" id="numInput" placeholder="输入任意数字或此时念头">
+    <div class="btn-group">
         <button onclick="calculate()" style="flex: 3;">开启感应</button>
-        <button onclick="document.getElementById('numInput').value=''; document.getElementById('result').style.display='none';" 
-                style="flex: 1; background: rgba(255,255,255,0.1); color: #9CA3AF; font-size: 0.8rem; border: 1px solid rgba(209,167,93,0.2);">
-            清除
-        </button>
+        <button onclick="clearAll()" style="flex: 1; background: rgba(255,255,255,0.1); color: #9CA3AF;">清除</button>
     </div>
-
+    <div id="result">
+        <div class="res-num" id="resTitle"></div>
+        <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem;"></div>
+    </div>
+</div>
+<script>
+    const library = {
+        1: { title: "开创者", desc: "当下的能量充满了突破与独立的意志。你的第一个念头就是答案。" },
+        2: { title: "协调者", desc: "此时此刻，‘等待’比‘行动’更有力量。平衡感是你最强大的武器。" },
+        3: { title: "表达者", desc: "灵感正在你周围汇聚，你的表达将具有极强的感染力。" },
+        4: { title: "构建者", desc: "能量趋于稳固。通过整理周围的空间，你的思维会变得异常清晰。" },
+        5: { title: "探索者", desc: "机会藏在变化之中。保持好奇心，不要抗拒突如其来的邀约。" },
+        6: { title: "守护者", desc: "温和而强大的能量正包围着你。适合处理人际关系或关怀自身。" },
+        7: { title: "深思者", desc: "能量场鼓励你向内探索。此时最适合独处、思考或研究。" },
+        8: { title: "成就者", desc: "物质与效率的能量达到顶峰。果断决策，会有意想不到的收获。" },
+        9: { title: "圆满者", desc: "一个阶段性的终结。学会放下旧物，为下一阶段腾出空间。" }
+    };
+    function calculate() {
+        let n = document.getElementById('numInput').value;
+        if(!n) return;
+        let val = n.toString().split('').reduce((a, b) => parseInt(a) + (parseInt(b) || 0), 0);
+        while (val > 9) val = val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+        if (val === 0) val = 9;
+        document.getElementById('resTitle').innerText = library[val].title;
+        document.getElementById('resDesc').innerText = library[val].desc;
+        document.getElementById('result').style.display = 'block';
+    }
+    function clearAll() {
+        document.getElementById('numInput').value = '';
+        document.getElementById('result').style.display = 'none';
+    }
+</script>
+</body>
+</html>
