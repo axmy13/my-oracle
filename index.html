@@ -3,87 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MY-ORACLE | 数字频率感应</title>
-    <link rel="icon" type="image/png" href="icon.png">
+    <title>MY-ORACLE | 數字頻率感應</title>
+    
+    <meta property="og:title" content="🔮 MY-ORACLE｜領取你的專屬頻率啟示">
+    <meta property="og:description" content="起心動念，皆有定數。輸入當下的數字或念頭，開啟你的專屬啟示。">
+    <meta property="og:image" content="https://axmy13.github.io/tarot-/icon.png">
+    <meta property="og:url" content="https://axmy13.github.io/tarot-/">
+    <meta property="og:type" content="website">
+
     <style>
         :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; --subtext: #9CA3AF; }
-        body { 
-            margin: 0; background: var(--bg); color: var(--text); 
-            font-family: sans-serif; min-height: 100vh;
-            display: flex; align-items: center; justify-content: center; padding: 20px;
-        }
-        .container { 
-            width: 100%; max-width: 400px; text-align: center; 
-            background: rgba(15, 18, 24, 0.9); padding: 40px 24px; 
-            border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { width: 100%; max-width: 400px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.4rem; letter-spacing: 2px; }
-        input { 
-            width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; 
-            padding: 16px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none;
-        }
+        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; padding: 16px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none; }
         .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        button { 
-            background: var(--gold); color: #000; border: none; padding: 16px; 
-            border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s;
-        }
-        #result { 
-            margin-top: 30px; display: none; text-align: left; 
-            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; animation: fadeIn 0.5s;
-        }
+        button { background: var(--gold); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 3; }
+        .btn-clear { background: rgba(255,255,255,0.1); color: var(--subtext); flex: 1; }
+        #result { margin-top: 30px; display: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; animation: fadeIn 0.5s; }
         .res-num { color: var(--gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
         .res-action { font-size: 0.85rem; color: var(--subtext); font-style: italic; border-left: 2px solid var(--gold); padding-left: 10px; margin-top: 15px; }
+        /* 新增分享按鈕樣式 */
+        .btn-share { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 20px; padding: 12px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
     </style>
 </head>
 <body>
-<div class="container">
-    <img src="icon.png" alt="Logo">
-    <h1>MY ORACLE</h1>
-    <input type="text" id="numInput" placeholder="输入任意数字或此时念头">
-    <div class="btn-group">
-        <button onclick="calculate()" style="flex: 3;">开启感应</button>
-        <button onclick="clearAll()" style="flex: 1; background: rgba(255,255,255,0.1); color: #9CA3AF; font-size: 0.8rem;">清除</button>
+    <div class="container">
+        <img src="icon.png" alt="Logo">
+        <h1>MY-ORACLE</h1>
+        <input type="text" id="numInput" placeholder="输入任意数字或此时念头">
+        <div class="btn-group">
+            <button onclick="calculate()">开启感应</button>
+            <button class="btn-clear" onclick="clearAll()">清除</button>
+        </div>
+        <div id="result">
+            <div class="res-num" id="resTitle"></div>
+            <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem; color: var(--text);"></div>
+            <div class="res-action" id="resAction"></div>
+            <button class="btn-share" onclick="shareToFB()">🙏 分享此份啟示</button>
+        </div>
     </div>
-    <div id="result">
-        <div class="res-num" id="resTitle"></div>
-        <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem; color: var(--text);"></div>
-        <div class="res-action" id="resAction"></div>
-    </div>
-</div>
+
 <script>
     const library = {
-        1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意志。不要依赖他人的建议，你直觉里的第一个念头就是答案。", action: "建议：今日尝试一件从未做过的小事。" },
-        2: { title: "协调者 (The Balance)", desc: "此时此刻，‘等待’比‘行动’更有力量。能量场显示你需要通过合作或聆听来获取信息。平衡感是你最强大的武器。", action: "建议：今日多听少说，观察细节里的美。" },
-        3: { title: "表达者 (The Creative)", desc: "灵感正在你周围汇聚，这是一个向外输出能量的好时机。无论是文字、图像还是交谈，你的表达将具有极强的感染力。", action: "建议：记录下你刚刚闪过的那个念头。" },
-        4: { title: "构建者 (The Structure)", desc: "能量趋于稳固。现在不是冒险的时机，而是整理与归纳的时刻。通过整理周围的物理空间，你的思维会变得异常清晰。", action: "建议：花10分钟整理你的桌面或手机桌面。" },
-        5: { title: "探索者 (The Catalyst)", desc: "不确定性是这一刻的主题。能量场在剧烈波动，这意味着机会藏在变化之中。保持好奇心，不要抗拒突如其来的邀约。", action: "建议：走一条平时不常走的路回家。" },
-        6: { title: "守护者 (The Harmony)", desc: "温和而强大的治愈能量正包围着你。适合处理人际关系或关怀自身。你的直觉会引导你走向最和谐的选择。", action: "建议：给远方的朋友发个简单的问候。" },
-        7: { title: "深思者 (The Seeker)", desc: "外在世界是喧嚣的，但你的内在异常清澈。能量场鼓励你向内探索。此时最适合独处、进行深度思考或研究。", action: "建议：关闭手机通知，静坐5分钟。" },
-        8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是最高效的处理时刻。果断决策，会有意想不到的收获。", action: "建议：处理掉那件你拖延最久的事情。" },
-        9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲惫，但这是升华的前奏。学会放下不再适合你的旧物，为下一阶段腾出空间。", action: "建议：清理掉一件不再使用的旧物。" }
+        1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意...", action: "建议：勇敢迈出第一步。" },
+        2: { title: "协调者 (The Balance)", desc: "此时此刻，「等待」比「行动」更有力量。能量场显示你需要通...", action: "建议：今日多听少说，观察细节里的美。" },
+        8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是...", action: "建议：处理掉那件你拖延最久的事情。" },
+        9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲憊，但这是升华的前奏。", action: "建议：清理掉一件不再使用的旧物。" }
     };
+
     function calculate() {
         let n = document.getElementById('numInput').value;
         if(!n) return;
+        // 保持你原本的數字累加邏輯
         let val = n.toString().split('').reduce((a, b) => parseInt(a) + (parseInt(b) || 0), 0);
         while (val > 9) val = val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
         if (val === 0) val = 9;
+
         const res = library[val];
         document.getElementById('resTitle').innerText = res.title;
         document.getElementById('resDesc').innerText = res.desc;
         document.getElementById('resAction').innerText = res.action;
         document.getElementById('result').style.display = 'block';
     }
+
     function clearAll() {
         document.getElementById('numInput').value = '';
         document.getElementById('result').style.display = 'none';
     }
+
+    // 新增臉書分享函式
+    function shareToFB() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
 </script>
 </body>
 </html>
-
-
