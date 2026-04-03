@@ -3,66 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MY-ORACLE | 數字頻率感應</title>
+    <title>MY-ORACLE | 数字频率感应</title>
     
-    <meta property="og:title" content="🔮 MY-ORACLE｜領取你的專屬頻率啟示">
-    <meta property="og:description" content="起心動念，皆有定數。輸入當下的數字或念頭，開啟你的專屬啟示。">
-    <meta property="og:image" content="https://axmy13.github.io/tarot-/icon.png">
-    <meta property="og:url" content="https://axmy13.github.io/tarot-/">
+    <meta property="og:title" content="🔮 MY-ORACLE｜数字频率感应启示">
+    <meta property="og:description" content="起心动念，皆有定数。输入当下的数字，开启你的专属频率启示。">
+    <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
+    <meta property="og:image" content="https://axmy13.github.io/my-oracle/icon.png">
     <meta property="og:type" content="website">
 
     <style>
+        /* 2. 视觉样式：延续你喜欢的黑金 Cyber-Zen 风格 */
         :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; --subtext: #9CA3AF; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        
         .container { width: 100%; max-width: 400px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.4rem; letter-spacing: 2px; }
+        
         input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; padding: 16px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none; }
+        
         .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
         button { background: var(--gold); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 3; }
         .btn-clear { background: rgba(255,255,255,0.1); color: var(--subtext); flex: 1; }
+        
         #result { margin-top: 30px; display: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; animation: fadeIn 0.5s; }
         .res-num { color: var(--gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
         .res-action { font-size: 0.85rem; color: var(--subtext); font-style: italic; border-left: 2px solid var(--gold); padding-left: 10px; margin-top: 15px; }
-        /* 新增分享按鈕樣式 */
+        
+        /* 分享按钮样式 */
         .btn-share { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 20px; padding: 12px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; }
+        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
     </style>
 </head>
 <body>
+
     <div class="container">
         <img src="icon.png" alt="Logo">
         <h1>MY-ORACLE</h1>
         <input type="text" id="numInput" placeholder="输入任意数字或此时念头">
+        
         <div class="btn-group">
             <button onclick="calculate()">开启感应</button>
             <button class="btn-clear" onclick="clearAll()">清除</button>
         </div>
+
         <div id="result">
             <div class="res-num" id="resTitle"></div>
-            <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem; color: var(--text);"></div>
+            <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem;"></div>
             <div class="res-action" id="resAction"></div>
-            <button class="btn-share" onclick="shareToFB()">🙏 分享此份啟示</button>
+            
+            <button class="btn-share" onclick="shareToFB()">🙏 分享此份启示至脸书</button>
         </div>
     </div>
 
 <script>
+    // 4. 内容库：保持你原本的描述内容
     const library = {
-        1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意...", action: "建议：勇敢迈出第一步。" },
-        2: { title: "协调者 (The Balance)", desc: "此时此刻，「等待」比「行动」更有力量。能量场显示你需要通...", action: "建议：今日多听少说，观察细节里的美。" },
-        8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是...", action: "建议：处理掉那件你拖延最久的事情。" },
-        9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲憊，但这是升华的前奏。", action: "建议：清理掉一件不再使用的旧物。" }
+        1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意志...", action: "建议：勇敢迈出第一步。" },
+        2: { title: "协调者 (The Balance)", desc: "此时此刻，「等待」比「行动」更有力量。能量场显示你需要通过合作或聆听来获取信息。", action: "建议：今日多听少说，观察细节里的美。" },
+        8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是最高效的处理时刻。果断决策，会有意想不到的收获。", action: "建议：处理掉那件你拖延最久的事情。" },
+        9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲惫，但这是升华的前奏。学会放下不再适合你的旧物，为下一阶段腾出空间。", action: "建议：清理掉一件不再使用的旧物。" }
     };
 
+    // 5. 核心逻辑：保持你原本的数字频率累加计算
     function calculate() {
         let n = document.getElementById('numInput').value;
         if(!n) return;
-        // 保持你原本的數字累加邏輯
-        let val = n.toString().split('').reduce((a, b) => parseInt(a) + (parseInt(b) || 0), 0);
-        while (val > 9) val = val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+        
+        // 保持原本的逻辑：如果是文字则取编码，如果是数字则累加
+        let val = 0;
+        for (let i = 0; i < n.length; i++) {
+            let charCode = n.charCodeAt(i);
+            val += isNaN(n[i]) ? charCode : parseInt(n[i]);
+        }
+
+        while (val > 9) {
+            val = val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+        }
         if (val === 0) val = 9;
 
-        const res = library[val];
+        const res = library[val] || library[1];
         document.getElementById('resTitle').innerText = res.title;
         document.getElementById('resDesc').innerText = res.desc;
         document.getElementById('resAction').innerText = res.action;
@@ -74,11 +95,12 @@
         document.getElementById('result').style.display = 'none';
     }
 
-    // 新增臉書分享函式
+    // 6. 脸书分享功能：强制指定当前项目的网址
     function shareToFB() {
-        const url = encodeURIComponent(window.location.href);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        const url = "https://axmy13.github.io/my-oracle/";
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
     }
 </script>
+
 </body>
 </html>
