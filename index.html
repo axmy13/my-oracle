@@ -2,125 +2,132 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>辛言解憂站 | 數字頻率感應</title>
-    
-    <style>
-        :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; --subtext: #9CA3AF; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'PingFang SC', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
-        
-        nav { display: flex; justify-content: space-around; padding: 15px 0; border-bottom: 1px solid rgba(209, 167, 93, 0.3); width: 100%; background: rgba(10, 17, 40, 0.9); position: sticky; top: 0; z-index: 100; }
-        nav a { color: var(--gold); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辛言解憂站 | 金蓮花頻率感應</title>
 
-        .container { width: 94%; max-width: 720px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 30px 0; box-sizing: border-box; }
+    <meta property="og:title" content="👉 靜心感應：金蓮花心靈啟示">
+    <meta property="og:description" content="輸入你的念頭，讓金蓮花頻率帶領你找回內心的平靜與方向。✨">
+    <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
+    <meta property="og:image" content="https://axmy13.github.io/my-oracle/logo.png">
+
+    <style>
+        :root { --gold: #D1A75D; --bg: #05070A; }
+        body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px 0; box-sizing: border-box; }
         
-        .logo-img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
-        h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.6rem; letter-spacing: 4px; }
+        .container { 
+            text-align: center; background: rgba(15, 18, 24, 0.98); 
+            padding: 40px 25px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 90%; max-width: 420px; 
+        }
+
+        .logo-img { width: 120px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
         
-        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; padding: 18px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 25px; outline: none; }
+        h1 { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 5px; color: var(--gold); }
+        p.subtitle { font-size: 0.85rem; color: #888; margin-bottom: 30px; letter-spacing: 1px; }
         
-        .btn-group { display: flex; gap: 15px; margin-bottom: 25px; }
-        button { background: var(--gold); color: #000; border: none; padding: 16px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 3; font-size: 1.1rem; }
-        .btn-clear { background: rgba(255,255,255,0.1); color: var(--subtext); flex: 1; border-radius: 30px; }
+        input { 
+            width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(209,167,93,0.3); border-radius: 15px; 
+            padding: 18px; color: #fff; font-size: 1rem; text-align: center; 
+            margin-bottom: 20px; transition: 0.3s;
+        }
+        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.08); outline: none; }
+
+        button { 
+            width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; 
+            padding: 16px; border-radius: 50px; font-weight: bold; 
+            font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-bottom: 15px;
+        }
+        button:hover { filter: brightness(1.1); box-shadow: 0 0 15px rgba(209, 167, 93, 0.4); }
+        button:active { transform: scale(0.97); }
+
+        .btn-share { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 10px; }
+
+        #result-box { 
+            margin-top: 30px; display: none; padding-top: 25px; 
+            border-top: 1px solid rgba(209, 167, 93, 0.1); animation: fadeIn 1s;
+        }
+        .res-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: var(--gold); letter-spacing: 2px; }
+        .res-desc { line-height: 1.9; color: #efefef; font-size: 1.05rem; margin-bottom: 25px; text-align: justify; text-justify: inter-ideograph; }
         
-        #result { margin-top: 30px; display: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; animation: fadeIn 0.5s; }
-        .res-num { color: var(--gold); font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; border-bottom: 1px solid var(--gold); padding-bottom: 10px; display: inline-block; }
-        .res-action { font-size: 0.95rem; color: #1b5e20; font-weight: bold; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 8px; margin-top: 20px; }
+        .disclaimer { font-size: 0.75rem; color: #555; line-height: 1.5; margin-top: 30px; padding: 10px; border: 1px dashed #333; border-radius: 10px; }
         
-        .btn-share { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 25px; padding: 14px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; } }
+        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 30px; display: block; transition: 0.3s; }
+        .nav-link:hover { color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div style="width:94%; max-width:720px; display: flex; justify-content: space-around;">
-            <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 辛言解憂站 (FB)</a>
-            <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
-            <a href="https://axmy13.github.io/my-oracle/">🔢 數字感應</a>
-        </div>
-    </nav>
+<div class="container">
+    <img src="logo.png" alt="Lotus" class="logo-img">
+    <h1>解憂占卜站</h1>
+    <p class="subtitle">金蓮花能量實驗室</p>
+    
+    <input type="text" id="userInput" placeholder="請輸入此刻困擾你的念頭、文字或數字" maxlength="50">
+    
+    <button onclick="calculate()">✨ 開啟感應頻率 ✨</button>
 
-    <div class="container">
-        <img src="icon.png" alt="Logo" class="logo-img">
-        <h1>辛言解憂站</h1>
-        <p style="color:var(--gold); margin-bottom:20px; font-size:0.9rem; letter-spacing:2px;">數字頻率感應實驗室</p>
-        
-        <input type="text" id="numInput" placeholder="輸入今日念頭（每日感應皆不同）">
-        
-        <div class="btn-group">
-            <button onclick="calculate()">✨ 開啟感應 ✨</button>
-            <button class="btn-clear" onclick="clearAll()">清除</button>
-        </div>
-
-        <div id="result">
-            <div class="res-num" id="resTitle"></div>
-            <div id="resDesc" style="line-height: 1.8; font-size: 1.05rem; color: #f4f4f4;"></div>
-            <div class="res-action" id="resAction"></div>
-            <button class="btn-share" onclick="shareToFB()">🙏 分享此份啟示至臉書</button>
-        </div>
+    <div id="result-box">
+        <div class="res-title">【感應結果】</div>
+        <div class="res-desc" id="resDesc"></div>
+        <button class="btn-share" onclick="shareToFB()">📢 分享這份平安啟示</button>
     </div>
 
+    <div class="disclaimer">
+        ⚠️ 溫馨提醒：本工具僅供心靈探索與壓力舒緩使用，不構成任何財務、投資或法律建議。人生重大決定請務必諮詢專業人士並理性評估。
+    </div>
+
+    <a href="https://www.facebook.com/profile.php?id=61582018845158" target="_blank" class="nav-link">← 返回辛言解憂站 FB 專頁</a>
+</div>
+
 <script>
+    // 安全性詞庫：強調「觀照」、「平靜」、「智慧」
     const library = {
-        1: { title: "1. 顯化之源", desc: "能量頂峰，適合啟動。當下的念頭具有強大創造力。", action: "✨ 寫下本月最想實現的一個願望。" },
-        2: { title: "2. 靈魂共振", desc: "暫停奔跑。所有的美好源於內心和諧，宇宙正通過直覺對話。", action: "✨ 對鏡子裡的自己說聲『我愛你』。" },
-        3: { title: "3. 喜悅頻率", desc: "高頻信號！用玩樂的心態面對困擾，好運會更容易被吸引。", action: "✨ 聽一首喜歡的歌並隨之律動。" },
-        4: { title: "4. 安全港灣", desc: "建立根基的時刻。穩定即是力量，當前挑戰是內在成長的基石。", action: "✨ 整理空間，清空一件不再需要的舊物。" },
-        5: { title: "5. 自由轉机", desc: "變革能量湧動。打破限制，接受不確定性，驚喜就在舒適區外。", action: "✨ 嘗試一件從未做過的小事。" },
-        6: { title: "6. 愛與治癒", desc: "溫柔頻率。照顧他人前請先自愛，愛是解決當前困擾的唯一答案。", action: "✨ 為自己準備一份精緻的飲品。" },
-        7: { title: "7. 覺醒智慧", desc: "通往真相的階梯。答案不在外界而在寂靜中，信任你的高我。", action: "✨ 進行 10 分鐘靜坐，觀察大腦念頭。" },
-        8: { title: "8. 豐盛能量", desc: "無限可能敞開。放下匱乏感，以『已擁有』的心態去顯化物質。", action: "✨ 觀想達成目標後的喜悅心情一分鐘。" },
-        9: { title: "9. 大圓滿境", desc: "週期圓滿。感恩過去的一切，這是升華前奏，結束是更好的開始。", action: "✨ 寫下三件今天要感謝的人事物。" },
-        10: { title: "10. 全新次元", desc: "超越個體限制的廣大能量。你正在與更高層次的宇宙頻率接軌。", action: "✨ 向宇宙下一個大膽的訂單。" },
-        11: { title: "11. 導師頻率", desc: "大師數字！強大的直覺與靈感正在降臨，你具有照亮他人的力量。", action: "✨ 分享一個正面觀點給身邊的朋友。" },
-        12: { title: "12. 循環躍遷", desc: "在變遷中尋求平衡。你正處於兩個階段的交界處，請保持耐心。", action: "✨ 嘗試從不同的角度看一件煩心事。" },
-        22: { title: "22. 夢想構築", desc: "大師級建設者。你有能力將最宏大的願景轉化為現實，專注執行。", action: "✨ 列出達成目標的三個具體步驟。" },
-        13: { title: "13. 鳳凰重生", desc: "深層轉化。舊有的模式正在崩塌，新的生命力即將從灰燼中升起。", action: "✨ 告別一個負面的習慣。" },
-        15: { title: "15. 能量磁場", desc: "吸引力極強。你的氣場正在擴張，請確保吸引的是你真正想要的。", action: "✨ 在心中默念三次正向肯定句。" },
-        18: { title: "18. 月光啟示", desc: "隱藏的真相即將浮現。信任你的夢境與潛意識給出的微妙暗示。", action: "✨ 睡前問潛意識一個你關心的問題。" },
-        24: { title: "24. 守護之手", desc: "宇宙正全方位護持你。放下焦慮，你所愛的一切都被溫柔守護著。", action: "✨ 給予身邊的人一個溫暖的擁抱。" },
-        33: { title: "33. 慈悲之光", desc: "最高精神頻率。透過無私的愛，你將獲得最強大的療癒與顯化力。", action: "✨ 隨機做一件不求回報的好事。" }
+        action: ["宇宙的流轉提示你：現在適合", "金蓮花的頻率建議你：試著先", "此刻的內在能量導引你：去", "這份感應提醒你：不妨", "當下的氣場建議你：保持", "金蓮花的智慧提示：請深度"],
+        target: ["觀照自己內心的波瀾", "整理目前的思緒並靜待時機", "信任你過去累積的智慧", "與內在的自我進行對話", "調整前進的節奏而非急於求成", "釋放對未知結果的焦慮", "審視目前計畫中的微小細節", "在安靜中尋找問題的核心"],
+        ending: ["，蓮花自會綻放其美。", "，安安靜靜地觀看事物的流轉。", "，答案往往藏在最平靜的時刻。", "，持守正念，自然會有所收穫。", "，這是一個適合內省與充電的時刻。", "，不急不躁，才能看清真相。"]
     };
 
     function calculate() {
-        let n = document.getElementById('numInput').value;
-        if(!n) return;
-        
+        const input = document.getElementById('userInput').value.trim();
+        if (!input) { alert("請先輸入您的念頭，讓金蓮花為您感應。"); return; }
+
+        const resBox = document.getElementById('result-box');
+        const resDesc = document.getElementById('resDesc');
+
+        // 生成高隨機性的 Hash 種子
         let today = new Date();
-        let dateStr = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString();
-        let combinedInput = n + dateStr;
+        let dateSeed = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString();
+        let combinedInput = input + dateSeed;
         
-        let val = 0;
+        let hash1 = 0, hash2 = 0, hash3 = 0;
         for (let i = 0; i < combinedInput.length; i++) {
-            val += combinedInput.charCodeAt(i);
+            let char = combinedInput.charCodeAt(i);
+            hash1 = ((hash1 << 5) - hash1) + char;
+            hash2 = ((hash2 << 7) - hash2) + char;
+            hash3 = ((hash3 << 3) - hash3) + char;
         }
 
-        // 邏輯優化：動態對應 1-18 的數值
-        let finalKey = (val % 18) + 1;
-        // 如果 11, 22, 33 剛好被取餘數漏掉，增加隨機觸發機率
-        if (val % 11 === 0 && val % 22 !== 0) finalKey = 11;
-        if (val % 22 === 0) finalKey = 22;
-        if (val % 33 === 0) finalKey = 33;
+        // 從詞庫中提取組合 (使用取模運算確保多樣性)
+        const a = library.action[Math.abs(hash1) % library.action.length];
+        const t = library.target[Math.abs(hash2) % library.target.length];
+        const e = library.ending[Math.abs(hash3) % library.ending.length];
 
-        const res = library[finalKey] || library[1];
-        document.getElementById('resTitle').innerText = res.title;
-        document.getElementById('resDesc').innerText = res.desc;
-        document.getElementById('resAction').innerText = res.action;
-        document.getElementById('result').style.display = 'block';
-        document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function clearAll() {
-        document.getElementById('numInput').value = '';
-        document.getElementById('result').style.display = 'none';
+        resDesc.innerText = `${a}${t}${e}`;
+        resBox.style.display = 'block';
+        
+        // 滾動到結果位置
+        resBox.scrollIntoView({ behavior: 'smooth' });
     }
 
     function shareToFB() {
-        const url = "https://axmy13.github.io/my-oracle/";
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        const url = encodeURIComponent(window.location.href);
+        const quote = encodeURIComponent("我在【辛言解憂站】領取了金蓮花啟示，找回了內心的平靜。✨");
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
     }
 </script>
+
 </body>
 </html>
