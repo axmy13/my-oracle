@@ -1,77 +1,93 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MY-ORACLE | 数字频率感应</title>
+    <title>辛言解憂站 | 數字頻率感應</title>
     
-    <meta property="og:title" content="🔮 MY-ORACLE｜数字频率感应启示">
-    <meta property="og:description" content="起心动念，皆有定数。输入当下的数字，开启你的专属频率启示。">
+    <meta property="og:title" content="🔮 辛言解憂站｜數字頻率感應啟示">
+    <meta property="og:description" content="起心動念，皆有定數。輸入當下的數字，開啟你的專屬頻率啟示。">
     <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
     <meta property="og:image" content="https://axmy13.github.io/my-oracle/icon.png">
     <meta property="og:type" content="website">
 
     <style>
-        /* 2. 视觉样式：延续你喜欢的黑金 Cyber-Zen 风格 */
+        /* 視覺樣式：延續黑金 Cyber-Zen 風格 */
         :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; --subtext: #9CA3AF; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'PingFang SC', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
         
-        .container { width: 100%; max-width: 400px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
-        h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.4rem; letter-spacing: 2px; }
+        /* 統一品牌導航欄 */
+        nav { display: flex; justify-content: space-around; padding: 15px 0; border-bottom: 1px solid rgba(209, 167, 93, 0.3); width: 100%; background: rgba(10, 17, 40, 0.9); position: sticky; top: 0; z-index: 100; }
+        nav a { color: var(--gold); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+
+        /* 調整容器為 720px 最佳寬度 */
+        .container { width: 94%; max-width: 720px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 30px 0; box-sizing: border-box; }
         
-        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; padding: 16px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none; }
+        .logo-img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
+        h1 { color: var(--gold); margin-bottom: 30px; font-size: 1.6rem; letter-spacing: 4px; }
         
-        .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        button { background: var(--gold); color: #000; border: none; padding: 16px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 3; }
-        .btn-clear { background: rgba(255,255,255,0.1); color: var(--subtext); flex: 1; }
+        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.05); border: 1px solid rgba(209,167,93,0.3); border-radius: 12px; padding: 18px; color: white; font-size: 1.1rem; text-align: center; margin-bottom: 25px; outline: none; }
         
-        #result { margin-top: 30px; display: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; animation: fadeIn 0.5s; }
-        .res-num { color: var(--gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
-        .res-action { font-size: 0.85rem; color: var(--subtext); font-style: italic; border-left: 2px solid var(--gold); padding-left: 10px; margin-top: 15px; }
+        .btn-group { display: flex; gap: 15px; margin-bottom: 25px; }
+        button { background: var(--gold); color: #000; border: none; padding: 16px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; flex: 3; font-size: 1.1rem; }
+        .btn-clear { background: rgba(255,255,255,0.1); color: var(--subtext); flex: 1; border-radius: 30px; }
         
-        /* 分享按钮样式 */
-        .btn-share { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 20px; padding: 12px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; }
+        #result { margin-top: 30px; display: none; text-align: left; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; animation: fadeIn 0.5s; }
+        .res-num { color: var(--gold); font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; border-bottom: 1px solid var(--gold); padding-bottom: 10px; display: inline-block; }
+        .res-action { font-size: 0.95rem; color: #1b5e20; font-weight: bold; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 8px; margin-top: 20px; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+        .btn-share { width: 100%; background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 25px; padding: 14px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
+    <nav>
+        <div style="width:94%; max-width:720px; display: flex; justify-content: space-around;">
+            <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 辛言解憂站 (FB)</a>
+            <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
+            <a href="https://axmy13.github.io/myoracle/zhuge.html">📜 諸葛神數</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <img src="icon.png" alt="Logo">
-        <h1>MY-ORACLE</h1>
-        <input type="text" id="numInput" placeholder="输入任意数字或此时念头">
+        <img src="icon.png" alt="Logo" class="logo-img">
+        <h1>辛言解憂站</h1>
+        <p style="color:var(--gold); margin-bottom:20px; font-size:0.9rem; letter-spacing:2px;">數字頻率感應實驗室</p>
+        <input type="text" id="numInput" placeholder="輸入任意數字或此時念頭">
         
         <div class="btn-group">
-            <button onclick="calculate()">开启感应</button>
+            <button onclick="calculate()">✨ 開啟感應 ✨</button>
             <button class="btn-clear" onclick="clearAll()">清除</button>
         </div>
 
         <div id="result">
             <div class="res-num" id="resTitle"></div>
-            <div id="resDesc" style="line-height: 1.6; font-size: 0.95rem;"></div>
+            <div id="resDesc" style="line-height: 1.8; font-size: 1.05rem; color: #f4f4f4;"></div>
             <div class="res-action" id="resAction"></div>
             
-            <button class="btn-share" onclick="shareToFB()">🙏 分享此份启示至脸书</button>
+            <button class="btn-share" onclick="shareToFB()">🙏 分享此份啟示至臉書</button>
         </div>
     </div>
 
 <script>
-    // 4. 内容库：保持你原本的描述内容
     const library = {
-        1: { title: "开创者 (The Origin)", desc: "你正处于一个周期的起点。当下的能量充满了突破与独立的意志...", action: "建议：勇敢迈出第一步。" },
-        2: { title: "协调者 (The Balance)", desc: "此时此刻，「等待」比「行动」更有力量。能量场显示你需要通过合作或聆听来获取信息。", action: "建议：今日多听少说，观察细节里的美。" },
-        8: { title: "成就者 (The Power)", desc: "物质与效率的能量达到顶峰。如果你有积压已久的任务，现在是最高效的处理时刻。果断决策，会有意想不到的收获。", action: "建议：处理掉那件你拖延最久的事情。" },
-        9: { title: "圆满者 (The Completion)", desc: "一个阶段性的终结。你可能感到些许疲惫，但这是升华的前奏。学会放下不再适合你的旧物，为下一阶段腾出空间。", action: "建议：清理掉一件不再使用的旧物。" }
+        1: { title: "1. 開創者 (The Origin)", desc: "你正處於一個週期的起點。當下的能量充滿了突破與獨立的意志。如果你正在猶豫某個新計劃，宇宙正給予你肯定的信號。去戰鬥吧，第一步最難，但也最有價值。", action: "💡 建議：勇敢邁出第一步，不要回頭。" },
+        2: { title: "2. 協調者 (The Balance)", desc: "此時此刻，「等待」比「行動」更有力量。能量場顯示你需要通過合作或聆聽來獲取信息。溫柔地與世界溝通，你會發現之前忽略的微小轉機。", action: "💡 建議：今日多聽少說，觀察細節裡的平衡。" },
+        3: { title: "3. 表達者 (The Expression)", desc: "創意與社交的能量正在迸發。這是一個適合分享與溝通的時刻。你的想法會引起他人的共鳴，不要隱藏你的光芒，去表達，去創作，去歡笑。", action: "💡 建議：聯繫一位老朋友，或寫下你的靈感。" },
+        4: { title: "4. 建設者 (The Foundation)", desc: "現在需要的是穩定與秩序。當下的頻率提醒你檢查基礎是否牢固。這不是冒險的好時機，而是深耕的時刻。專注於細節，建立屬於你的安全感。", action: "💡 建議：整理你的辦公桌，制定一個務實的周計劃。" },
+        5: { title: "5. 冒險者 (The Freedom)", desc: "變革的風正在吹動。你可能感到心癢難耐，想要突破現狀。接受這種不確定性，嘗試一些全新的事物。驚喜往往出現在你踏出舒適區的那一刻。", action: "💡 建議：嘗試一條沒走過的路，或點一份沒吃過的菜。" },
+        6: { title: "6. 奉獻者 (The Nurture)", desc: "能量集中在家庭與和諧。你可能需要承擔一些責任，或是給予身邊人關懷。這份付出會以「內心的寧靜」作為回報。愛，是解決當前困擾的唯一答案。", action: "💡 建議：回家陪陪家人，或給予路人一個微笑。" },
+        7: { title: "7. 尋求者 (The Spirit)", desc: "進入內省與智慧的頻率。外界的嘈雜不屬於你，你現在需要安靜。這是一個適合學習、冥想或研究深層問題的時刻。答案不在外面，而在你心裡。", action: "💡 建議：關掉手機一小時，與自己深度對話。" },
+        8: { title: "8. 成就者 (The Power)", desc: "物質與效率的能量達到頂峰。如果你有積壓已久的任務，現在是最高效處理時刻。果斷決策，會有意想不到的物質回報。你是掌控者。", action: "💡 建議：處理掉那件你拖延最久的事情。" },
+        9: { title: "9. 圓滿者 (The Completion)", desc: "一個階段性的終結。你可能感到些許疲憊，但這是昇華的前奏。學會放下不再適合你的舊物或舊念頭，為下一階段騰出空間。結束是為了更好的開始。", action: "💡 建議：清理掉一件不再使用的舊物。" }
     };
 
-    // 5. 核心逻辑：保持你原本的数字频率累加计算
     function calculate() {
         let n = document.getElementById('numInput').value;
         if(!n) return;
         
-        // 保持原本的逻辑：如果是文字则取编码，如果是数字则累加
         let val = 0;
         for (let i = 0; i < n.length; i++) {
             let charCode = n.charCodeAt(i);
@@ -83,11 +99,14 @@
         }
         if (val === 0) val = 9;
 
-        const res = library[val] || library[1];
+        const res = library[val];
         document.getElementById('resTitle').innerText = res.title;
         document.getElementById('resDesc').innerText = res.desc;
         document.getElementById('resAction').innerText = res.action;
         document.getElementById('result').style.display = 'block';
+        
+        // 自動滾動到結果
+        document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
     }
 
     function clearAll() {
@@ -95,7 +114,6 @@
         document.getElementById('result').style.display = 'none';
     }
 
-    // 6. 脸书分享功能：强制指定当前项目的网址
     function shareToFB() {
         const url = "https://axmy13.github.io/my-oracle/";
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
