@@ -5,22 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>辛言解憂站 | 數字頻率感應</title>
     
-    <meta property="og:title" content="🔮 辛言解憂站｜數字頻率感應啟示">
-    <meta property="og:description" content="起心動念，皆有定數。輸入當下的數字，開啟你的專屬頻率啟示。">
-    <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
-    <meta property="og:image" content="https://axmy13.github.io/my-oracle/icon.png">
-    <meta property="og:type" content="website">
-
     <style>
-        /* 視覺樣式：延續黑金 Cyber-Zen 風格 */
         :root { --bg: #05070A; --gold: #D1A75D; --text: #E8E8E8; --subtext: #9CA3AF; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'PingFang SC', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
         
-        /* 統一品牌導航欄 */
         nav { display: flex; justify-content: space-around; padding: 15px 0; border-bottom: 1px solid rgba(209, 167, 93, 0.3); width: 100%; background: rgba(10, 17, 40, 0.9); position: sticky; top: 0; z-index: 100; }
         nav a { color: var(--gold); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
 
-        /* 調整容器為 720px 最佳寬度 */
         .container { width: 94%; max-width: 720px; text-align: center; background: rgba(15, 18, 24, 0.9); padding: 40px 24px; border-radius: 24px; border: 1px solid rgba(209, 167, 93, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 30px 0; box-sizing: border-box; }
         
         .logo-img { width: 80px; height: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
@@ -47,7 +38,7 @@
         <div style="width:94%; max-width:720px; display: flex; justify-content: space-around;">
             <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 辛言解憂站 (FB)</a>
             <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
-            <a href="https://axmy13.github.io/myoracle/zhuge.html">📜 諸葛神數</a>
+            <a href="https://axmy13.github.io/my-oracle/">🔢 數字感應</a>
         </div>
     </nav>
 
@@ -55,7 +46,8 @@
         <img src="icon.png" alt="Logo" class="logo-img">
         <h1>辛言解憂站</h1>
         <p style="color:var(--gold); margin-bottom:20px; font-size:0.9rem; letter-spacing:2px;">數字頻率感應實驗室</p>
-        <input type="text" id="numInput" placeholder="輸入任意數字或此時念頭">
+        
+        <input type="text" id="numInput" placeholder="輸入今日念頭（每日感應皆不同）">
         
         <div class="btn-group">
             <button onclick="calculate()">✨ 開啟感應 ✨</button>
@@ -66,46 +58,57 @@
             <div class="res-num" id="resTitle"></div>
             <div id="resDesc" style="line-height: 1.8; font-size: 1.05rem; color: #f4f4f4;"></div>
             <div class="res-action" id="resAction"></div>
-            
             <button class="btn-share" onclick="shareToFB()">🙏 分享此份啟示至臉書</button>
         </div>
     </div>
 
 <script>
     const library = {
-        1: { title: "1. 開創者 (The Origin)", desc: "你正處於一個週期的起點。當下的能量充滿了突破與獨立的意志。如果你正在猶豫某個新計劃，宇宙正給予你肯定的信號。去戰鬥吧，第一步最難，但也最有價值。", action: "💡 建議：勇敢邁出第一步，不要回頭。" },
-        2: { title: "2. 協調者 (The Balance)", desc: "此時此刻，「等待」比「行動」更有力量。能量場顯示你需要通過合作或聆聽來獲取信息。溫柔地與世界溝通，你會發現之前忽略的微小轉機。", action: "💡 建議：今日多聽少說，觀察細節裡的平衡。" },
-        3: { title: "3. 表達者 (The Expression)", desc: "創意與社交的能量正在迸發。這是一個適合分享與溝通的時刻。你的想法會引起他人的共鳴，不要隱藏你的光芒，去表達，去創作，去歡笑。", action: "💡 建議：聯繫一位老朋友，或寫下你的靈感。" },
-        4: { title: "4. 建設者 (The Foundation)", desc: "現在需要的是穩定與秩序。當下的頻率提醒你檢查基礎是否牢固。這不是冒險的好時機，而是深耕的時刻。專注於細節，建立屬於你的安全感。", action: "💡 建議：整理你的辦公桌，制定一個務實的周計劃。" },
-        5: { title: "5. 冒險者 (The Freedom)", desc: "變革的風正在吹動。你可能感到心癢難耐，想要突破現狀。接受這種不確定性，嘗試一些全新的事物。驚喜往往出現在你踏出舒適區的那一刻。", action: "💡 建議：嘗試一條沒走過的路，或點一份沒吃過的菜。" },
-        6: { title: "6. 奉獻者 (The Nurture)", desc: "能量集中在家庭與和諧。你可能需要承擔一些責任，或是給予身邊人關懷。這份付出會以「內心的寧靜」作為回報。愛，是解決當前困擾的唯一答案。", action: "💡 建議：回家陪陪家人，或給予路人一個微笑。" },
-        7: { title: "7. 尋求者 (The Spirit)", desc: "進入內省與智慧的頻率。外界的嘈雜不屬於你，你現在需要安靜。這是一個適合學習、冥想或研究深層問題的時刻。答案不在外面，而在你心裡。", action: "💡 建議：關掉手機一小時，與自己深度對話。" },
-        8: { title: "8. 成就者 (The Power)", desc: "物質與效率的能量達到頂峰。如果你有積壓已久的任務，現在是最高效處理時刻。果斷決策，會有意想不到的物質回報。你是掌控者。", action: "💡 建議：處理掉那件你拖延最久的事情。" },
-        9: { title: "9. 圓滿者 (The Completion)", desc: "一個階段性的終結。你可能感到些許疲憊，但這是昇華的前奏。學會放下不再適合你的舊物或舊念頭，為下一階段騰出空間。結束是為了更好的開始。", action: "💡 建議：清理掉一件不再使用的舊物。" }
+        1: { title: "1. 顯化之源", desc: "能量頂峰，適合啟動。當下的念頭具有強大創造力。", action: "✨ 寫下本月最想實現的一個願望。" },
+        2: { title: "2. 靈魂共振", desc: "暫停奔跑。所有的美好源於內心和諧，宇宙正通過直覺對話。", action: "✨ 對鏡子裡的自己說聲『我愛你』。" },
+        3: { title: "3. 喜悅頻率", desc: "高頻信號！用玩樂的心態面對困擾，好運會更容易被吸引。", action: "✨ 聽一首喜歡的歌並隨之律動。" },
+        4: { title: "4. 安全港灣", desc: "建立根基的時刻。穩定即是力量，當前挑戰是內在成長的基石。", action: "✨ 整理空間，清空一件不再需要的舊物。" },
+        5: { title: "5. 自由轉机", desc: "變革能量湧動。打破限制，接受不確定性，驚喜就在舒適區外。", action: "✨ 嘗試一件從未做過的小事。" },
+        6: { title: "6. 愛與治癒", desc: "溫柔頻率。照顧他人前請先自愛，愛是解決當前困擾的唯一答案。", action: "✨ 為自己準備一份精緻的飲品。" },
+        7: { title: "7. 覺醒智慧", desc: "通往真相的階梯。答案不在外界而在寂靜中，信任你的高我。", action: "✨ 進行 10 分鐘靜坐，觀察大腦念頭。" },
+        8: { title: "8. 豐盛能量", desc: "無限可能敞開。放下匱乏感，以『已擁有』的心態去顯化物質。", action: "✨ 觀想達成目標後的喜悅心情一分鐘。" },
+        9: { title: "9. 大圓滿境", desc: "週期圓滿。感恩過去的一切，這是升華前奏，結束是更好的開始。", action: "✨ 寫下三件今天要感謝的人事物。" },
+        10: { title: "10. 全新次元", desc: "超越個體限制的廣大能量。你正在與更高層次的宇宙頻率接軌。", action: "✨ 向宇宙下一個大膽的訂單。" },
+        11: { title: "11. 導師頻率", desc: "大師數字！強大的直覺與靈感正在降臨，你具有照亮他人的力量。", action: "✨ 分享一個正面觀點給身邊的朋友。" },
+        12: { title: "12. 循環躍遷", desc: "在變遷中尋求平衡。你正處於兩個階段的交界處，請保持耐心。", action: "✨ 嘗試從不同的角度看一件煩心事。" },
+        22: { title: "22. 夢想構築", desc: "大師級建設者。你有能力將最宏大的願景轉化為現實，專注執行。", action: "✨ 列出達成目標的三個具體步驟。" },
+        13: { title: "13. 鳳凰重生", desc: "深層轉化。舊有的模式正在崩塌，新的生命力即將從灰燼中升起。", action: "✨ 告別一個負面的習慣。" },
+        15: { title: "15. 能量磁場", desc: "吸引力極強。你的氣場正在擴張，請確保吸引的是你真正想要的。", action: "✨ 在心中默念三次正向肯定句。" },
+        18: { title: "18. 月光啟示", desc: "隱藏的真相即將浮現。信任你的夢境與潛意識給出的微妙暗示。", action: "✨ 睡前問潛意識一個你關心的問題。" },
+        24: { title: "24. 守護之手", desc: "宇宙正全方位護持你。放下焦慮，你所愛的一切都被溫柔守護著。", action: "✨ 給予身邊的人一個溫暖的擁抱。" },
+        33: { title: "33. 慈悲之光", desc: "最高精神頻率。透過無私的愛，你將獲得最強大的療癒與顯化力。", action: "✨ 隨機做一件不求回報的好事。" }
     };
 
     function calculate() {
         let n = document.getElementById('numInput').value;
         if(!n) return;
         
+        let today = new Date();
+        let dateStr = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString();
+        let combinedInput = n + dateStr;
+        
         let val = 0;
-        for (let i = 0; i < n.length; i++) {
-            let charCode = n.charCodeAt(i);
-            val += isNaN(n[i]) ? charCode : parseInt(n[i]);
+        for (let i = 0; i < combinedInput.length; i++) {
+            val += combinedInput.charCodeAt(i);
         }
 
-        while (val > 9) {
-            val = val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
-        }
-        if (val === 0) val = 9;
+        // 邏輯優化：動態對應 1-18 的數值
+        let finalKey = (val % 18) + 1;
+        // 如果 11, 22, 33 剛好被取餘數漏掉，增加隨機觸發機率
+        if (val % 11 === 0 && val % 22 !== 0) finalKey = 11;
+        if (val % 22 === 0) finalKey = 22;
+        if (val % 33 === 0) finalKey = 33;
 
-        const res = library[val];
+        const res = library[finalKey] || library[1];
         document.getElementById('resTitle').innerText = res.title;
         document.getElementById('resDesc').innerText = res.desc;
         document.getElementById('resAction').innerText = res.action;
         document.getElementById('result').style.display = 'block';
-        
-        // 自動滾動到結果
         document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -119,6 +122,5 @@
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
     }
 </script>
-
 </body>
 </html>
