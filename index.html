@@ -6,9 +6,11 @@
     <title>辛言解憂站 | 金蓮花頻率感應</title>
 
     <meta property="og:title" content="👉 靜心感應：金蓮花心靈啟示">
-    <meta property="og:description" content="輸入你的念頭，讓金蓮花頻率帶領你找回內心的平靜與方向。✨">
+    <meta property="og:description" content="輸入你的念頭，找回內心的平靜。✨">
     <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
     <meta property="og:image" content="https://axmy13.github.io/my-oracle/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
 
     <style>
@@ -21,7 +23,6 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 90%; max-width: 420px; 
         }
 
-        /* 使用 icon.png 作為網頁上的 Logo */
         .logo-img { width: 120px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
         
         h1 { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 5px; color: var(--gold); }
@@ -41,23 +42,16 @@
             font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-bottom: 15px;
         }
         button:hover { filter: brightness(1.1); box-shadow: 0 0 15px rgba(209, 167, 93, 0.4); }
-        button:active { transform: scale(0.97); }
-
-        .btn-share { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-top: 10px; }
 
         #result-box { 
             margin-top: 30px; display: none; padding-top: 25px; 
-            border-top: 1px solid rgba(209, 167, 93, 0.1); animation: fadeIn 1s;
+            border-top: 1px solid rgba(209, 167, 93, 0.1); 
         }
-        .res-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: var(--gold); letter-spacing: 2px; }
-        .res-desc { line-height: 1.9; color: #efefef; font-size: 1.05rem; margin-bottom: 25px; text-align: justify; }
+        .res-desc { line-height: 1.9; color: #efefef; font-size: 1.05rem; margin-bottom: 25px; }
         
         .disclaimer { font-size: 0.75rem; color: #555; line-height: 1.5; margin-top: 30px; padding: 10px; border: 1px dashed #333; border-radius: 10px; }
         
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 30px; display: block; transition: 0.3s; }
-        .nav-link:hover { color: var(--gold); }
+        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 30px; display: block; }
     </style>
 </head>
 <body>
@@ -72,13 +66,11 @@
     <button onclick="calculate()">✨ 開啟感應頻率 ✨</button>
 
     <div id="result-box">
-        <div class="res-title">【感應結果】</div>
         <div class="res-desc" id="resDesc"></div>
-        <button class="btn-share" onclick="shareToFB()">📢 分享這份平安啟示</button>
     </div>
 
     <div class="disclaimer">
-        ⚠️ 溫馨提醒：本工具僅供心靈探索與壓力舒緩使用，不構成任何財務、投資或法律建議。人生重大決定請務必諮詢專業人士並理性評估。
+        ⚠️ 溫馨提醒：本工具僅供心靈探索與壓力舒緩使用，不構成投資建議。
     </div>
 
     <a href="https://www.facebook.com/profile.php?id=61582018845158" target="_blank" class="nav-link">← 返回辛言解憂站 FB 專頁</a>
@@ -88,41 +80,25 @@
     const library = {
         action: ["宇宙的流轉提示你：現在適合", "金蓮花的頻率建議你：試著先", "此刻的內在能量導引你：去", "這份感應提醒你：不妨", "當下的氣場建議你：保持", "金蓮花的智慧提示：請深度"],
         target: ["觀照自己內心的波瀾", "整理目前的思緒並靜待時機", "信任你過去累積的智慧", "與內在的自我進行對話", "調整前進的節奏而非急於求成", "釋放對未知結果的焦慮", "審視目前計畫中的微小細節", "在安靜中尋找問題的核心"],
-        ending: ["，蓮花自會綻放其美。", "，安安靜靜地觀看事物的流轉。", "，答案往往藏在最平靜的時刻。", "，持守正念，自然會有所收獲。", "，這是一個適合內省與充電的時刻。", "，不急不躁，才能看清真相。"]
+        ending: ["，蓮花自會綻放其美。", "，安安靜靜地觀看事物的流轉。", "，答案往往藏在最平靜的時刻。", "，持守正念，自然會有所收穫。", "，這是一個適合內省與充電的時刻。", "，不急不躁，才能看清真相。"]
     };
 
     function calculate() {
         const input = document.getElementById('userInput').value.trim();
-        if (!input) { alert("請先輸入您的念頭，讓金蓮花為您感應。"); return; }
-
+        if (!input) { alert("請先輸入您的念頭。"); return; }
         const resBox = document.getElementById('result-box');
         const resDesc = document.getElementById('resDesc');
-
         let today = new Date();
-        let dateSeed = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString();
-        let combinedInput = input + dateSeed;
-        
+        let seed = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString() + input;
         let h1 = 0, h2 = 0, h3 = 0;
-        for (let i = 0; i < combinedInput.length; i++) {
-            let char = combinedInput.charCodeAt(i);
+        for (let i = 0; i < seed.length; i++) {
+            let char = seed.charCodeAt(i);
             h1 = ((h1 << 5) - h1) + char;
             h2 = ((h2 << 7) - h2) + char;
             h3 = ((h3 << 3) - h3) + char;
         }
-
-        const a = library.action[Math.abs(h1) % library.action.length];
-        const t = library.target[Math.abs(h2) % library.target.length];
-        const e = library.ending[Math.abs(h3) % library.ending.length];
-
-        resDesc.innerText = `${a}${t}${e}`;
+        resDesc.innerText = `${library.action[Math.abs(h1) % library.action.length]}${library.target[Math.abs(h2) % library.target.length]}${library.ending[Math.abs(h3) % library.ending.length]}`;
         resBox.style.display = 'block';
-        resBox.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function shareToFB() {
-        const url = encodeURIComponent(window.location.href);
-        const quote = encodeURIComponent("我在【辛言解憂站】領取了金蓮花啟示，找回了內心的平靜。✨");
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
     }
 </script>
 
