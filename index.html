@@ -8,7 +8,8 @@
     <meta property="og:title" content="👉 靜心感應：金蓮花心靈啟示">
     <meta property="og:description" content="輸入你的念頭，讓金蓮花頻率帶領你找回內心的平靜與方向。✨">
     <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
-    <meta property="og:image" content="https://axmy13.github.io/my-oracle/logo.png">
+    <meta property="og:image" content="https://axmy13.github.io/my-oracle/og-image.png">
+    <meta property="og:type" content="website">
 
     <style>
         :root { --gold: #D1A75D; --bg: #05070A; }
@@ -20,6 +21,7 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 90%; max-width: 420px; 
         }
 
+        /* 使用 icon.png 作為網頁上的 Logo */
         .logo-img { width: 120px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
         
         h1 { font-size: 1.4rem; letter-spacing: 4px; margin-bottom: 5px; color: var(--gold); }
@@ -48,7 +50,7 @@
             border-top: 1px solid rgba(209, 167, 93, 0.1); animation: fadeIn 1s;
         }
         .res-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; color: var(--gold); letter-spacing: 2px; }
-        .res-desc { line-height: 1.9; color: #efefef; font-size: 1.05rem; margin-bottom: 25px; text-align: justify; text-justify: inter-ideograph; }
+        .res-desc { line-height: 1.9; color: #efefef; font-size: 1.05rem; margin-bottom: 25px; text-align: justify; }
         
         .disclaimer { font-size: 0.75rem; color: #555; line-height: 1.5; margin-top: 30px; padding: 10px; border: 1px dashed #333; border-radius: 10px; }
         
@@ -61,7 +63,7 @@
 <body>
 
 <div class="container">
-    <img src="logo.png" alt="Lotus" class="logo-img">
+    <img src="icon.png" alt="Lotus" class="logo-img">
     <h1>解憂占卜站</h1>
     <p class="subtitle">金蓮花能量實驗室</p>
     
@@ -83,11 +85,10 @@
 </div>
 
 <script>
-    // 安全性詞庫：強調「觀照」、「平靜」、「智慧」
     const library = {
         action: ["宇宙的流轉提示你：現在適合", "金蓮花的頻率建議你：試著先", "此刻的內在能量導引你：去", "這份感應提醒你：不妨", "當下的氣場建議你：保持", "金蓮花的智慧提示：請深度"],
         target: ["觀照自己內心的波瀾", "整理目前的思緒並靜待時機", "信任你過去累積的智慧", "與內在的自我進行對話", "調整前進的節奏而非急於求成", "釋放對未知結果的焦慮", "審視目前計畫中的微小細節", "在安靜中尋找問題的核心"],
-        ending: ["，蓮花自會綻放其美。", "，安安靜靜地觀看事物的流轉。", "，答案往往藏在最平靜的時刻。", "，持守正念，自然會有所收穫。", "，這是一個適合內省與充電的時刻。", "，不急不躁，才能看清真相。"]
+        ending: ["，蓮花自會綻放其美。", "，安安靜靜地觀看事物的流轉。", "，答案往往藏在最平靜的時刻。", "，持守正念，自然會有所收獲。", "，這是一個適合內省與充電的時刻。", "，不急不躁，才能看清真相。"]
     };
 
     function calculate() {
@@ -97,28 +98,24 @@
         const resBox = document.getElementById('result-box');
         const resDesc = document.getElementById('resDesc');
 
-        // 生成高隨機性的 Hash 種子
         let today = new Date();
         let dateSeed = today.getFullYear().toString() + (today.getMonth() + 1).toString() + today.getDate().toString();
         let combinedInput = input + dateSeed;
         
-        let hash1 = 0, hash2 = 0, hash3 = 0;
+        let h1 = 0, h2 = 0, h3 = 0;
         for (let i = 0; i < combinedInput.length; i++) {
             let char = combinedInput.charCodeAt(i);
-            hash1 = ((hash1 << 5) - hash1) + char;
-            hash2 = ((hash2 << 7) - hash2) + char;
-            hash3 = ((hash3 << 3) - hash3) + char;
+            h1 = ((h1 << 5) - h1) + char;
+            h2 = ((h2 << 7) - h2) + char;
+            h3 = ((h3 << 3) - h3) + char;
         }
 
-        // 從詞庫中提取組合 (使用取模運算確保多樣性)
-        const a = library.action[Math.abs(hash1) % library.action.length];
-        const t = library.target[Math.abs(hash2) % library.target.length];
-        const e = library.ending[Math.abs(hash3) % library.ending.length];
+        const a = library.action[Math.abs(h1) % library.action.length];
+        const t = library.target[Math.abs(h2) % library.target.length];
+        const e = library.ending[Math.abs(h3) % library.ending.length];
 
         resDesc.innerText = `${a}${t}${e}`;
         resBox.style.display = 'block';
-        
-        // 滾動到結果位置
         resBox.scrollIntoView({ behavior: 'smooth' });
     }
 
