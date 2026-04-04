@@ -14,51 +14,18 @@
     <style>
         :root { --gold: #D1A75D; --bg: #05070A; }
         body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        
-        .container { 
-            text-align: center; background: rgba(15, 18, 24, 0.98); 
-            padding: 40px 25px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 100%; max-width: 420px; 
-        }
-
-        .logo-img { width: 100px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
+        .container { text-align: center; background: rgba(15, 18, 24, 0.98); padding: 40px 25px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 100%; max-width: 420px; }
+        .logo-img { width: 90px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
         h1 { font-size: 1.4rem; letter-spacing: 4px; margin: 0; color: var(--gold); }
-        p.subtitle { font-size: 0.85rem; color: #888; margin-bottom: 25px; margin-top: 5px; }
-        
-        input { 
-            width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); 
-            border: 1px solid rgba(209,167,93,0.3); border-radius: 15px; 
-            padding: 18px; color: #fff; font-size: 1rem; text-align: center; 
-            margin-bottom: 20px; outline: none; transition: 0.3s;
-        }
-        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.08); }
-
-        .btn-main { 
-            width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; 
-            padding: 16px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
-        }
-        .btn-main:active { transform: scale(0.98); }
-
-        #result-box { 
-            margin-top: 30px; display: none; padding: 20px; 
-            background: rgba(209, 167, 93, 0.05); border-radius: 20px; border: 1px solid rgba(209, 167, 93, 0.15);
-            animation: fadeIn 0.8s forwards;
-        }
-        
-        .res-content { text-align: left; color: #efefef; line-height: 1.8; margin-bottom: 25px; }
-        .res-content b { color: var(--gold); font-size: 1.1rem; }
-        .res-advice { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; font-size: 0.95rem; border-left: 3px solid var(--gold); margin-top: 15px; }
-
-        .btn-fb { 
-            background: #1877F2; color: #fff; border: none; padding: 14px; border-radius: 50px; 
-            font-weight: bold; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; font-size: 1rem;
-        }
-
-        .disclaimer { font-size: 0.7rem; color: #555; margin-top: 30px; line-height: 1.4; padding: 0 10px; }
-        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 25px; display: block; border-bottom: 1px solid transparent; width: fit-content; margin-left: auto; margin-right: auto; }
-        .nav-link:hover { color: var(--gold); border-bottom: 1px solid var(--gold); }
-        
+        p.subtitle { font-size: 0.8rem; color: #666; margin-bottom: 25px; margin-top: 5px; }
+        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); border: 1px solid rgba(209,167,93,0.3); border-radius: 15px; padding: 18px; color: #fff; font-size: 1rem; text-align: center; margin-bottom: 20px; outline: none; }
+        .btn-main { width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; padding: 16px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        #result-box { margin-top: 30px; display: none; padding: 25px; background: rgba(209, 167, 93, 0.03); border-radius: 20px; border: 1px solid rgba(209, 167, 93, 0.1); animation: fadeIn 0.8s forwards; text-align: left; }
+        .res-text { color: #efefef; line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; white-space: pre-line; }
+        .res-text b { color: var(--gold); }
+        .btn-fb { background: #1877F2; color: #fff; border: none; padding: 14px; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; }
+        .disclaimer { font-size: 0.7rem; color: #444; margin-top: 30px; line-height: 1.4; }
+        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 25px; display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -67,62 +34,56 @@
 <div class="container">
     <img src="icon.png" alt="Lotus" class="logo-img">
     <h1>解憂占卜站</h1>
-    <p class="subtitle">金蓮花能量實驗室</p>
+    <p class="subtitle">金蓮花能量頻率實驗室</p>
     
-    <input type="text" id="userInput" placeholder="輸入此刻困擾你的念頭、文字或數字">
-    
+    <input type="text" id="userInput" placeholder="輸入此刻困擾你的念頭或數字">
     <button class="btn-main" onclick="calculate()">✨ 開啟感應頻率 ✨</button>
 
     <div id="result-box">
-        <div class="res-content" id="resDesc"></div>
+        <div class="res-text" id="resDesc"></div>
         <button class="btn-fb" onclick="shareToFB()">🔵 分享臉書 · 傳遞好運</button>
     </div>
 
     <div class="disclaimer">
-        ⚠️ 聲明：本工具僅供心靈探索與壓力舒緩使用，不構成任何財務、投資或法律專業建議。人生重大決策請務必諮詢專業人士並理性評估風險。
+        ⚠️ 聲明：本工具僅供心靈啟發使用，不構成財務、投資或法律專業建議。人生決策請務必理性評估風險。
     </div>
-
     <a href="https://www.facebook.com/profile.php?id=61582018845158" target="_blank" class="nav-link">← 返回辛言解憂站 FB 專頁</a>
 </div>
 
 <script>
-    const oracleDatabase = [
-        { title: "【枯木逢春】", msg: "目前的困境已到盡頭，正如冬去春來，一股新的生機正在你看不見的地方醞釀。之前的停滯即將消散。", advice: "💡 建議：此刻不宜大刀闊斧，應細心播種，耐心等待最適合的時機出現。" },
-        { title: "【明月照路】", msg: "紛亂的心緒讓你暫時迷失，但金蓮花提示你，真相其實一直都在。只需靜下心，路自然會顯現出來。", advice: "💡 建議：暫停對外的尋求，今晚試著早點休息或冥想，答案會在安靜中浮現。" },
-        { title: "【火中生蓮】", msg: "壓力是最好的淬煉。你現在經歷的挑戰，是為了讓你的羽翼更加豐滿。這不是磨難，而是能量的轉化。", advice: "💡 建議：保持情緒穩定，不要被外界的聲音干擾，你的專業與韌性是勝出的關鍵。" },
-        { title: "【水順自然】", msg: "目前的頻率提示你「順勢而為」。如果事情進展不順，代表時機未到，強求反而會消耗你的能量。", advice: "💡 建議：學習水的智慧，繞過障礙而非硬碰硬。給自己一點彈性空間，會有更好的選擇。" },
-        { title: "【金光加持】", msg: "這是一個顯化的頻率。你過去積累的善緣與努力，即將在近期轉化為實質的回報，好消息就在路上了。", advice: "💡 建議：保持感恩之心，多向外傳遞正能量。這段時間非常適合與貴人聯繫。" },
-        { title: "【乾坤守靜】", msg: "目前的能量適合「守」。不動作就是最好的動作。在動盪的環境中保持如如不動，能為你避開潛在的風險。", advice: "💡 建議：對於任何投資或合約，請再三審視細節。現在是累積實力而非貿然出擊的時刻。" },
-        { title: "【和諧共振】", msg: "單打獨鬥的時代已過，你身邊隱藏著可以協助你的能量。打開你的心房，與志同道合的人連結吧。", advice: "💡 建議：主動發起對話，或是參與團隊合作。互利互惠的頻率會讓你事半功倍。" },
-        { title: "【雷霆萬鈞】", msg: "優柔寡斷是你目前的阻礙。如果你已經準備周全，現在就是果斷下決定、採取行動的黃金時刻。", advice: "💡 建議：相信你的第一直覺。執行力將決定接下來三個月的發展高度。" },
-        { title: "【內斂鋒芒】", msg: "才華洋溢是好事，但目前的頻率建議你保持低調。過早的展露可能會招來不必要的嫉妒或阻力。", advice: "💡 建議：默默做事，把成果做實。當你真正綻放時，金蓮花的香氣自然會吸引所有人。" },
-        { title: "【化繁為簡】", msg: "你把問題想得太複雜了。回歸初心，用最簡單的方式去處理，你會發現事情其實沒那麼糾結。", advice: "💡 建議：拿出一張紙，寫下最重要的三件事。刪除剩下的雜訊，你的路會瞬間清晰。" }
-    ];
+    const part1 = ["【感應意象】\n此刻如枯木逢春，", "【感應意象】\n目前如明月照路，", "【感應意象】\n此刻如火中生蓮，", "【感應意象】\n目前如水順自然，", "【感應意象】\n此刻如金光入命，", "【感應意象】\n目前如雷霆萬鈞，", "【感應意象】\n此刻如深潭靜水，", "【感應意象】\n目前如春風拂面，"];
+    const part2 = ["能量處於即將翻轉的奇點。", "過去積累的因果正在顯現。", "目前的頻率略顯急促與不安。", "潛在的貴人能量正在靠近。", "心靈的迷霧正被智慧驅散。", "舊有的模式正在劇烈瓦解。", "內在的力量正在暗中滋長。", "目前的氣場非常利於顯化。"];
+    const part3 = ["\n【關鍵轉機】\n一個看似阻礙的驚喜即將出現。", "某個被你忽略的細節是解藥。", "放下執著時，契機反而會降臨。", "等待時機成熟，答案不攻自破。", "與其向外求索，不如回歸本心。", "果斷的切割將帶來全新的生機。", "低調的積累會引發質變的翻身。", "真誠的溝通將化解一切陳年舊疾。"];
+    const part4 = ["\n\n💡 建議：此刻不宜大舉進攻，穩住陣腳即是最大的盈利。", "💡 建議：今晚早點休息，夢境中會帶給你最直接的指引。", "💡 建議：對於任何財務投資，請務必再三審視細節與風險。", "💡 建議：多與能量正向的朋友交流，能幫你避開當下的誤區。", "💡 建議：保持情緒的如如不動，這是你目前最強大的武器。", "💡 建議：給予自己一點空間，現在是「退步原來是向前」。", "💡 建議：執行力是關鍵，想到什麼就立刻動手去優化吧。", "💡 建議：保持感恩之心，好運將透過你的分享成倍增長。"];
 
     function calculate() {
         const input = document.getElementById('userInput').value.trim();
-        if (!input) { alert("請先輸入您的念頭、數字或心情。"); return; }
-
+        if (!input) { alert("請先輸入您的念頭或數字。"); return; }
         const resBox = document.getElementById('result-box');
         const resDesc = document.getElementById('resDesc');
 
-        // 改進 Hash 算法，增加日期權重，確保每日結果不同
-        let hash = 0;
         let seed = input + new Date().toLocaleDateString();
+        let h1=0, h2=0, h3=0, h4=0;
         for (let i = 0; i < seed.length; i++) {
-            hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+            let char = seed.charCodeAt(i);
+            h1 = ((h1 << 5) - h1) + char;
+            h2 = ((h2 << 7) - h2) + char;
+            h3 = ((h3 << 3) - h3) + char;
+            h4 = ((h4 << 1) - h4) + char;
         }
-        
-        let index = Math.abs(hash) % oracleDatabase.length;
-        let result = oracleDatabase[index];
 
-        resDesc.innerHTML = `<b>${result.title}</b><br>${result.msg}<div class="res-advice">${result.advice}</div>`;
+        const p1 = part1[Math.abs(h1) % part1.length];
+        const p2 = part2[Math.abs(h2) % part2.length];
+        const p3 = part3[Math.abs(h3) % part3.length];
+        const p4 = part4[Math.abs(h4) % part4.length];
+
+        resDesc.innerHTML = `<b>金蓮花感應啟示：</b>\n\n${p1}${p2}${p3}${p4}`;
         resBox.style.display = 'block';
     }
 
     function shareToFB() {
         const url = encodeURIComponent(window.location.href);
-        const quote = encodeURIComponent("我在【辛言解憂站】領取了金蓮花啟示，感應非常準確！分享接好運，也推薦給你試試！✨");
+        const quote = encodeURIComponent("我在【辛言解憂站】領取了專屬金蓮花啟示，感應頻率非常準確！分享接好運！✨");
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
     }
 </script>
