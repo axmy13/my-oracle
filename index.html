@@ -15,19 +15,16 @@
         .subtitle { color: #666; font-size: 0.8rem; margin-bottom: 25px; }
         input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); border: 1px solid var(--gold); border-radius: 15px; padding: 18px; color: #fff; font-size: 1.2rem; text-align: center; margin-bottom: 20px; outline: none; }
         .btn-main { width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; padding: 18px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        
         #result-box { display: none; margin-top: 30px; padding: 25px; background: var(--card); border-radius: 20px; border: 1px solid var(--gold); text-align: left; line-height: 1.8; animation: fadeIn 0.8s; }
         .gua-name { font-size: 1.3rem; font-weight: bold; color: var(--gold); text-align: center; margin-bottom: 15px; border-bottom: 1px dotted var(--gold); padding-bottom: 10px; }
         .section-title { color: var(--gold); font-weight: bold; margin-top: 15px; display: block; border-left: 3px solid var(--gold); padding-left: 8px; }
         .res-text { color: #eee; font-size: 0.95rem; margin-bottom: 10px; }
-        
         .btn-fb { background: #1877F2; color: #fff; border: none; padding: 16px; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 25px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .footer-link { display: block; margin-top: 30px; color: #666; text-decoration: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
 <div class="container">
     <nav>
         <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
@@ -35,64 +32,54 @@
     </nav>
     <img src="icon.png" alt="Lotus" class="logo-img">
     <h1>解憂占卜站</h1>
-    <p class="subtitle">金蓮花 · 賽博靈數感應系統</p>
-    
-    <input type="number" id="numInput" placeholder="輸入隨機三位數字 (如 384)" pattern="\d*">
+    <p class="subtitle">金蓮花 · 賽博靈數精確感應系統</p>
+    <input type="number" id="numInput" placeholder="輸入隨機三位數字" pattern="\d*">
     <button class="btn-main" onclick="divine()">✨ 啟動數理感應 ✨</button>
-
     <div id="result-box">
         <div id="guaTitle" class="gua-name"></div>
-        <span class="section-title">【能量現狀】</span>
-        <div id="resMeaning" class="res-text"></div>
-        <span class="section-title">【關鍵轉機】</span>
-        <div id="resChange" class="res-text"></div>
-        <span class="section-title">【行動建議】</span>
+        <span class="section-title">【卦象原文】</span>
+        <div id="resOriginal" class="res-text"></div>
+        <span class="section-title">【動爻啟示】</span>
+        <div id="resYao" class="res-text" style="color: #ffcc00; font-weight: bold;"></div>
+        <span class="section-title">【辛言教誨】</span>
         <div id="resAdvice" class="res-text"></div>
-        
         <button class="btn-fb" onclick="shareFB()">🔵 分享臉書 · 傳遞好運</button>
     </div>
-
     <a href="https://www.facebook.com/profile.php?id=61582018845158" class="footer-link">← 返回辛言解憂站 FB 專頁</a>
 </div>
 
 <script>
-    // 先天八卦數：1乾 2兌 3離 4震 5巽 6坎 7艮 8坤
     const guaNames = ["", "乾天", "兌澤", "離火", "震雷", "巽風", "坎水", "艮山", "坤地"];
-
-    // 64卦精選解讀字典 (補全核心邏輯)
-    const guaDict = {
-        "11": { n: "乾為天", m: "純陽剛建，萬物資始。目前的能量處於巔峰狀態，名利雙收。", a: "持盈保泰，戒驕戒躁。保持領導者的大氣與果斷。" },
-        "88": { n: "坤為地", m: "厚德載物，柔順包容。目前的形勢宜守不宜進，宜輔佐不宜主導。", a: "順應天時，包容萬物。靜待時機成熟再行出擊。" },
-        "64": { n: "水雷屯", m: "萬事起頭難，充滿生機但也充滿艱辛。目前正處於萌芽與累積期。", a: "宜尋求貴人相助，不宜輕舉妄動。耐心扎根方能成材。" },
-        "34": { n: "火雷噬嗑", m: "阻礙重重，必須咬碎障礙才能通行。象徵目前正面臨法律或強硬競爭。", a: "雷厲風行，公正無私。用剛強的手段解決累積已久的問題。" },
-        "63": { n: "水火既濟", m: "事已成，氣場和諧。但需防盛極而衰，目前是最穩定也最危險的時刻。", a: "居安思危，細節決定成敗。防範微小的紕漏引發混亂。" },
-        "36": { n: "火水未濟", m: "事未完，充滿希望與變數。目前的局勢尚未明朗，仍需最後一搏。", a: "保持信心，謹慎渡江。成功就在最後一步的堅持。" }
+    
+    // 這裡就是數據插槽，我們會分批填入 384 爻
+    const yaoDict = {
+        // 第一組：1-8 卦
+        "11": { n: "乾為天", o: "乾，元亨利貞。", y: ["", "初九：潛龍勿用。", "九二：見龍在田，利見大人。", "九三：君子終日乾乾，夕惕若，厲無咎。", "九四：或躍在淵，無咎。", "九五：飛龍在天，利見大人。", "上九：亢龍有悔。"], a: "目前能量極強，但需注意盛極必衰，謙遜方能長久。" },
+        "88": { n: "坤為地", o: "坤，元亨，利牝馬之貞。", y: ["", "初六：履霜，堅冰至。", "六二：直方大，不習無不利。", "六三：含章可貞，或從王事，無成有終。", "六四：括囊，無咎無譽。", "六五：黃裳，元吉。", "上六：龍戰於野，其血玄黃。"], a: "宜守不宜進，像大地一樣包容萬物，靜待時機。" },
+        "64": { n: "水雷屯", o: "屯，元亨利貞，勿用有攸往，利建侯。", y: ["", "初九：磐桓，利居貞，利建侯。", "六二：屯如邅如，乘馬班如。匪寇婚媾。", "六三：即鹿無虞，惟入於林中。", "六四：乘馬班如，求婚媾，往吉，無不利。", "九五：屯其膏，小貞吉，大貞凶。", "上六：乘馬班如，泣血漣如。"], a: "萬事起頭難，目前的困頓是為了未來的壯大，請保持耐心。" },
+        "76": { n: "山水蒙", o: "蒙，亨。匪我求童蒙，童蒙求我。", y: ["", "初六：發蒙，利用刑人，用說桎梏。", "九二：包蒙吉，納婦吉，子克家。", "六三：勿用取女，見金夫，不有躬。", "六四：困蒙，吝。", "六五：童蒙，吉。", "上九：擊蒙，不利為寇，利御寇。"], a: "處於迷茫期，宜虛心求教，開啟智慧，不宜盲目決策。" },
+        "61": { n: "水天需", o: "需，有孚，光亨，貞吉。利涉大川。", y: ["", "初九：需於郊，利用恆，無咎。", "九二：需於沙，小有言，終吉。", "九三：需於泥，致寇至。", "六四：需於血，出自穴。", "九五：需於酒食，貞吉。", "上六：入於穴，有不速之客三人來。"], a: "需要等待時機，此時不宜焦慮，在等待中積蓄能量。" },
+        "16": { n: "天水訟", o: "訟，有孚，窒惕，中吉，終凶。", y: ["", "初六：不永所事，小有言，終吉。", "九二：不克訟，歸而逋，其邑人三百戶，無眚。", "六三：食舊德，貞厲，終吉。", "九四：不克訟，復即命，渝安貞，吉。", "九五：訟，元吉。", "上九：或錫之鞶帶，一朝三褫之。"], a: "慎防爭端與口舌。退一步海闊天空，強求爭勝必有後患。" },
+        "86": { n: "地水師", o: "師，貞，丈人吉，無咎。", y: ["", "初六：師出以律，失律凶。", "九二：在師中，吉無咎，王三錫命。", "六三：師或輿屍，凶。", "六四：師左次，無咎。", "六五：田有禽，利執言，無咎。", "上六：大君有命，開國承家，小人勿用。"], a: "功成名就之時，賞罰需分明，尤其要遠離小人的影響。" },
+        "68": { n: "水地比", o: "比，吉。原筮，元永貞，無咎。", y: ["", "初六：有孚比之，無咎。", "六二：比之自內，貞吉。", "六三：比之匪人。", "六四：外比之，貞吉。", "九五：顯比，王用三驅，失前禽。", "上六：比之無首，凶。"], a: "利於尋求合作，與志同道合者同行，但需防範隨大流而迷失。" }
     };
 
     function divine() {
         const val = document.getElementById('numInput').value;
-        if (!val) { alert("請輸入數字。"); return; }
-        
+        if (!val) return;
         const num = parseInt(val);
-        // 優化梅花起卦法：百位上卦，個十位下卦，全數求和求動爻
         const up = (Math.floor(num / 100) % 8) || 8; 
         const down = (num % 8) || 8;
-        
-        // 修正動爻計算：累加數字位數 (例如 384 = 3+8+4=15)
-        const digits = val.split('').map(Number);
-        const sum = digits.reduce((a, b) => a + b, 0);
+        const sum = val.split('').reduce((a, b) => a + parseInt(b), 0);
         const move = (sum % 6) || 6;
-
-        const upGua = guaNames[up];
-        const downGua = guaNames[down];
-        const guaKey = `${up}${down}`;
-        const guaData = guaDict[guaKey] || { n: `${upGua}${downGua}`, m: `感應到 ${upGua} 與 ${downGua} 的交錯能量，定數中隱含轉機。`, a: "保持平常心，順應自然的節奏行事。" };
-
-        document.getElementById('guaTitle').innerText = `【 ${guaData.n} · 動第 ${move} 爻 】`;
-        document.getElementById('resMeaning').innerText = guaData.m;
-        document.getElementById('resChange').innerText = `動爻位於第 ${move} 爻，意味著在目前穩定的能量場中，正醞釀一個關鍵的突破點。`;
-        document.getElementById('resAdvice').innerText = guaData.a;
         
+        const key = `${up}${down}`;
+        const data = yaoDict[key] || { n: `${guaNames[up]}${guaNames[down]}`, o: "數據加載中...", y: ["", "感應中..."], a: "請等待後續數據包導入。" };
+
+        document.getElementById('guaTitle').innerText = `【 ${data.n} · 動第 ${move} 爻 】`;
+        document.getElementById('resOriginal').innerText = data.o;
+        document.getElementById('resYao').innerText = data.y[move];
+        document.getElementById('resAdvice').innerText = data.a;
         document.getElementById('result-box').style.display = 'block';
     }
 
