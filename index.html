@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>辛言解憂站 | 金蓮花頻率感應</title>
-
-    <meta property="og:title" content="👉 靜心感應：金蓮花心靈啟示">
-    <meta property="og:description" content="輸入你的念頭，領取金蓮花深度啟示，分享接好運！✨">
-    <meta property="og:url" content="https://axmy13.github.io/my-oracle/">
-    <meta property="og:image" content="https://axmy13.github.io/my-oracle/og-image.png">
-    <meta property="og:type" content="website">
-
     <style>
         :root { --gold: #D1A75D; --bg: #05070A; }
         body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
         .container { text-align: center; background: rgba(15, 18, 24, 0.98); padding: 40px 25px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 100%; max-width: 420px; }
+        nav { display: flex; justify-content: space-around; margin-bottom: 25px; border-bottom: 1px solid rgba(209, 167, 93, 0.2); padding-bottom: 10px; }
+        nav a { color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: bold; }
         .logo-img { width: 90px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
         h1 { font-size: 1.4rem; letter-spacing: 4px; margin: 0; color: var(--gold); }
         p.subtitle { font-size: 0.8rem; color: #666; margin-bottom: 25px; margin-top: 5px; }
@@ -32,53 +27,63 @@
 <body>
 
 <div class="container">
+    <nav>
+        <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 臉書主頁</a>
+        <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
+    </nav>
     <img src="icon.png" alt="Lotus" class="logo-img">
     <h1>解憂占卜站</h1>
     <p class="subtitle">金蓮花能量頻率實驗室</p>
-    
-    <input type="text" id="userInput" placeholder="輸入此刻困擾你的念頭或數字">
+    <input type="text" id="userInput" placeholder="輸入此刻困擾你的念頭、數字或狀況">
     <button class="btn-main" onclick="calculate()">✨ 開啟感應頻率 ✨</button>
-
     <div id="result-box">
         <div class="res-text" id="resDesc"></div>
         <button class="btn-fb" onclick="shareToFB()">🔵 分享臉書 · 傳遞好運</button>
     </div>
-
-    <div class="disclaimer">
-        ⚠️ 聲明：本工具僅供心靈啟發使用，不構成財務、投資或法律專業建議。人生決策請務必理性評估風險。
-    </div>
+    <div class="disclaimer">⚠️ 聲明：本工具僅供心靈啟發，不構成醫療、財務或法律建議。</div>
     <a href="https://www.facebook.com/profile.php?id=61582018845158" target="_blank" class="nav-link">← 返回辛言解憂站 FB 專頁</a>
 </div>
 
 <script>
-    const part1 = ["【感應意象】\n此刻如枯木逢春，", "【感應意象】\n目前如明月照路，", "【感應意象】\n此刻如火中生蓮，", "【感應意象】\n目前如水順自然，", "【感應意象】\n此刻如金光入命，", "【感應意象】\n目前如雷霆萬鈞，", "【感應意象】\n此刻如深潭靜水，", "【感應意象】\n目前如春風拂面，"];
-    const part2 = ["能量處於即將翻轉的奇點。", "過去積累的因果正在顯現。", "目前的頻率略顯急促與不安。", "潛在的貴人能量正在靠近。", "心靈的迷霧正被智慧驅散。", "舊有的模式正在劇烈瓦解。", "內在的力量正在暗中滋長。", "目前的氣場非常利於顯化。"];
-    const part3 = ["\n【關鍵轉機】\n一個看似阻礙的驚喜即將出現。", "某個被你忽略的細節是解藥。", "放下執著時，契機反而會降臨。", "等待時機成熟，答案不攻自破。", "與其向外求索，不如回歸本心。", "果斷的切割將帶來全新的生機。", "低調的積累會引發質變的翻身。", "真誠的溝通將化解一切陳年舊疾。"];
-    const part4 = ["\n\n💡 建議：此刻不宜大舉進攻，穩住陣腳即是最大的盈利。", "💡 建議：今晚早點休息，夢境中會帶給你最直接的指引。", "💡 建議：對於任何財務投資，請務必再三審視細節與風險。", "💡 建議：多與能量正向的朋友交流，能幫你避開當下的誤區。", "💡 建議：保持情緒的如如不動，這是你目前最強大的武器。", "💡 建議：給予自己一點空間，現在是「退步原來是向前」。", "💡 建議：執行力是關鍵，想到什麼就立刻動手去優化吧。", "💡 建議：保持感恩之心，好運將透過你的分享成倍增長。"];
+    // 【維度 1：卦象意象】 - 8 組
+    const p1_list = ["【感應意象】\n此刻如枯木逢春，", "【感應意象】\n目前如明月照路，", "【感應意象】\n此刻如火中生蓮，", "【感應意象】\n目前如水順自然，", "【感應意象】\n此刻如金光入命，", "【感應意象】\n目前如雷霆萬鈞，", "【感應意象】\n此刻如深潭靜水，", "【感應意象】\n目前如春風拂面，"];
+    
+    // 【維度 2：能量現狀】 - 8 組 (涵蓋事業、愛情、財運、健康)
+    const p2_list = ["事業能量處於即將翻轉的奇點。", "情感頻率正經歷一場深層排毒。", "財富磁場顯示有貴人暗中觀察。", "身體機能正在啟動自我修復機制。", "舊有的阻礙模式正被劇烈瓦解。", "目前的氣場極度利於願景顯化。", "過去積累的因果能量正在顯現。", "內在的力量正在靜默中悄然滋長。"];
+    
+    // 【維度 3：關鍵轉機】 - 8 組
+    const p3_list = ["\n【關鍵轉機】\n一個看似阻礙的驚喜即將出現。", "感情中某個被你忽略的細節是解藥。", "放下對財富的執著，契機反而降臨。", "這場小恙其實是為您擋掉了更大的災。", "與其向外求索，不如回歸本心。 ", "果斷的切割將帶來全新的事業生機。", "低調的積累會引發質變的翻身機會。", "真誠的溝通將化解一切陳年舊疾。"];
+    
+    // 【維度 4：行動建議】 - 8 組
+    const p4_list = ["\n\n💡 建議：此刻不宜大舉進攻，穩住陣腳即是盈利。", "💡 建議：今晚早睡泡腳，夢境會帶給你直接指引。", "💡 建議：對於任何財務投資，請務必再三審視細節。", "💡 建議：多與能量正向的朋友交流，避開情感誤區。", "💡 建議：保持情緒如如不動，這是目前最強的防禦。", "💡 建議：飲食宜溫補清淡，身體恢復後直覺會更敏銳。", "💡 建議：執行力是關鍵，想到什麼就立刻動手優化。", "💡 建議：保持感恩之心，好運將透過分享成倍增長。"];
 
     function calculate() {
         const input = document.getElementById('userInput').value.trim();
-        if (!input) { alert("請先輸入您的念頭或數字。"); return; }
+        if (!input) { alert("請輸入感應文字。"); return; }
+        
         const resBox = document.getElementById('result-box');
         const resDesc = document.getElementById('resDesc');
 
+        // 【核心算法】使用四個不同的種子，產生 4,096 種組合
         let seed = input + new Date().toLocaleDateString();
         let h1=0, h2=0, h3=0, h4=0;
         for (let i = 0; i < seed.length; i++) {
             let char = seed.charCodeAt(i);
             h1 = ((h1 << 5) - h1) + char;
-            h2 = ((h2 << 7) - h2) + char;
+            h2 = ((h2 << 7) - h2) + char; // 增加位移差異，拉開間距
             h3 = ((h3 << 3) - h3) + char;
             h4 = ((h4 << 1) - h4) + char;
         }
 
-        const p1 = part1[Math.abs(h1) % part1.length];
-        const p2 = part2[Math.abs(h2) % part2.length];
-        const p3 = part3[Math.abs(h3) % part3.length];
-        const p4 = part4[Math.abs(h4) % part4.length];
+        const s1 = p1_list[Math.abs(h1) % 8];
+        const s2 = p2_list[Math.abs(h2) % 8];
+        const s3 = p3_list[Math.abs(h3) % 8];
+        const s4 = p4_list[Math.abs(h4) % 8];
 
-        resDesc.innerHTML = `<b>金蓮花感應啟示：</b>\n\n${p1}${p2}${p3}${p4}`;
+        resDesc.innerHTML = `<b>金蓮花感應啟示：</b>\n\n${s1}${s2}${s3}${s4}`;
         resBox.style.display = 'block';
+        
+        setTimeout(() => { resBox.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
     }
 
     function shareToFB() {
@@ -87,6 +92,5 @@
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
     }
 </script>
-
 </body>
 </html>
