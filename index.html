@@ -10,12 +10,9 @@
         input { width: 85%; padding: 15px; margin: 15px 0; border-radius: 10px; border: 1px solid #30363d; background: #0d1117; color: white; text-align: center; font-size: 1.2em; outline: none; }
         input:focus { border-color: #d4af37; }
         .btn-main { background: linear-gradient(45deg, #d4af37, #b8860b); color: #0d1117; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1em; transition: 0.3s; margin-bottom: 10px; }
-        .btn-main:active { transform: scale(0.98); }
-        
         .btn-group { display: flex; gap: 10px; margin-top: 20px; }
         .btn-fb-share { background: #1877f2; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.85em; font-weight: bold; }
         .btn-home { background: #30363d; color: #c9d1d9; border: 1px solid #8b949e; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.85em; text-decoration: none; display: flex; align-items: center; justify-content: center; }
-        
         #result-box { margin-top: 25px; padding: 20px; border: 1px solid #d4af37; border-radius: 15px; display: none; text-align: left; background: rgba(212, 175, 55, 0.05); }
         .oracle-header { color: #d4af37; font-size: 1.1em; font-weight: bold; margin-bottom: 15px; text-align: center; border-bottom: 1px dashed #d4af37; padding-bottom: 10px; }
         .res-text { font-size: 1.05em; line-height: 1.8; white-space: pre-wrap; color: #e6edf3; }
@@ -26,22 +23,17 @@
 <div class="container">
     <h2 style="color: #d4af37; margin-bottom: 5px;">辛言解憂站</h2>
     <p style="color: #8b949e; margin-bottom: 20px;">數理感應 · 啟發心靈</p>
-    
     <input type="number" id="numInput" placeholder="請輸入感應到的 3 位靈數">
     <button class="btn-main" onclick="divine()">✨ 啟動感應 ✨</button>
 
     <div id="result-box">
         <div id="oracleHeader" class="oracle-header">感應結果</div>
         <div id="oracleContent" class="res-text"></div>
-        
         <div class="btn-group">
             <button class="btn-fb-share" onclick="shareFB()">🔵 分享啟發</button>
             <a href="https://www.facebook.com/profile.php?id=61582018845158" class="btn-home">🏠 回解憂首頁</a>
         </div>
-        
-        <p class="disclaimer">
-            * 溫馨提示：感應文字僅供啟發參考。人生決策請結合現實審慎考量。願這份啟示能為您帶來平靜。
-        </p>
+        <p class="disclaimer">* 溫馨提示：感應文字僅供啟發參考。人生決策請結合現實審慎考量。</p>
     </div>
 </div>
 
@@ -56,8 +48,8 @@
         "7": "【感應】人際關係中存在微妙的波動，需多加留意。\n【建議】說話前三思，以誠待人。處理糾紛時，退後一步往往能看清全局。",
         "8": "【感應】能量穩定且厚實，利於長遠的規劃。\n【建議】現在適合處理與基礎建設、理財或家庭相關的穩健事務。",
         "9": "【感應】思緒如繁花亂墜，容易感到迷茫或選擇困難。\n【建議】專注於目前最緊要的一件事。學會適時地捨棄，內心會更輕盈。",
-        "10": "【感應】一種付出後得到回饋的能量正在靠近。\n【建議】過去的努力正在發酵。請心懷感恩地接受成果，並與身邊的人分享喜悅。"，
-        // 11-40 條數據請在後續分批粘貼        "11": "【感應】目前如攀登山峰，過程辛苦但視野即將開闊。\n【建議】請再給自己一點耐心，穩住步調。很多事往往在堅持中迎來轉機。",
+        "10": "【感應】一種付出後得到回饋的能量正在靠近。\n【建議】過去的努力正在發酵。請心懷感恩地接受成果，並與身邊的人分享喜悅。",
+        "11": "【感應】目前如攀登山峰，過程辛苦但視野即將開闊。\n【建議】請再給自己一點耐心，穩住步調。很多事往往在堅持中迎來轉機。",
         "12": "【感應】有一股潛在的阻礙正在干擾您的步調。\n【建議】檢查是否有被忽略的細節。穩紮穩打地前進，會比追求速度更安全。",
         "13": "【感應】目前的氛圍非常利於團結與交流。\n【建議】主動尋求志同道合的夥伴。溝通與共識，會讓眼前的道路變得平坦。",
         "14": "【感應】心中有光，便無懼環境的明暗。\n【建議】即便現狀不盡如人意，也要守住初心。在安靜中等待時機的轉變。",
@@ -94,7 +86,6 @@
         if (!val) return;
         const index = (parseInt(val) % 384) || 384;
         const result = oracleDict[index] || "感應正在傳輸中，請稍後刷新試試...";
-        
         document.getElementById('oracleHeader').innerText = `感應序號：${index}`;
         document.getElementById('oracleContent').innerText = result;
         document.getElementById('result-box').style.display = 'block';
