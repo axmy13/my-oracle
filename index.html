@@ -12,10 +12,9 @@
         .btn-main { background: linear-gradient(45deg, #d4af37, #b8860b); color: #0d1117; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1em; transition: 0.3s; margin-bottom: 10px; }
         .btn-main:active { transform: scale(0.98); }
         
-        /* 新增：分享與返回按鈕樣式 */
         .btn-group { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-fb { background: #1877f2; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.9em; }
-        .btn-home { background: #30363d; color: #c9d1d9; border: 1px solid #8b949e; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.9em; text-decoration: none; display: inline-block; line-height: 1.2; }
+        .btn-fb-share { background: #1877f2; color: white; border: none; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.85em; font-weight: bold; }
+        .btn-home { background: #30363d; color: #c9d1d9; border: 1px solid #8b949e; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; font-size: 0.85em; text-decoration: none; display: flex; align-items: center; justify-content: center; }
         
         #result-box { margin-top: 25px; padding: 20px; border: 1px solid #d4af37; border-radius: 15px; display: none; text-align: left; background: rgba(212, 175, 55, 0.05); }
         .oracle-header { color: #d4af37; font-size: 1.1em; font-weight: bold; margin-bottom: 15px; text-align: center; border-bottom: 1px dashed #d4af37; padding-bottom: 10px; }
@@ -36,12 +35,12 @@
         <div id="oracleContent" class="res-text"></div>
         
         <div class="btn-group">
-            <button class="btn-fb" onclick="shareFB()">🔵 分享到臉書</button>
-            <a href="https://www.facebook.com/share/1BFzWLcXqL/" class="btn-home">🏠 回解憂首頁</a>
+            <button class="btn-fb-share" onclick="shareFB()">🔵 分享啟發</button>
+            <a href="https://www.facebook.com/profile.php?id=61582018845158" class="btn-home">🏠 回解憂首頁</a>
         </div>
         
         <p class="disclaimer">
-            * 溫馨提示：感應文字僅供啟發參考。人生決策請結合現實審慎考量。
+            * 溫馨提示：感應文字僅供啟發參考。人生決策請結合現實審慎考量。願這份啟示能為您帶來平靜。
         </p>
     </div>
 </div>
@@ -52,7 +51,13 @@
         "2": "【感應】前方雖有薄霧籠罩，但並非阻礙。\n【建議】此時適合緩步前行。建議先觀察局勢，等內心感到篤定後再做決定。",
         "3": "【感應】目前正處於順風期，阻力相對較小。\n【建議】若有合作機會，可以多加了解與接觸。在確保細節穩妥的前提下，適度推進。",
         "4": "【感應】目前的能量較為紛雜，容易產生內耗。\n【建議】先靜下心來，理清頭緒。不被外界聲音干擾，才是對自己負責的做法。",
-        // ... (5-40 條數據以此類推，建議您先粘貼這幾條測試)
+        "5": "【感應】這是一個充滿可能性的信號，可能會收穫意外的消息。\n【建議】保持心態開放。即便遇到突發狀況，也請試著從中尋找轉機。",
+        "6": "【感應】目前正處於一個瓶頸期，力量有些停滯。\n【建議】不建議強行突破。適當的休息與學習，是在為下一階段積攢能量。",
+        "7": "【感應】人際關係中存在微妙的波動，需多加留意。\n【建議】說話前三思，以誠待人。處理糾紛時，退後一步往往能看清全局。",
+        "8": "【感應】能量穩定且厚實，利於長遠的規劃。\n【建議】現在適合處理與基礎建設、理財或家庭相關的穩健事務。",
+        "9": "【感應】思緒如繁花亂墜，容易感到迷茫或選擇困難。\n【建議】專注於目前最緊要的一件事。學會適時地捨棄，內心會更輕盈。",
+        "10": "【感應】一種付出後得到回饋的能量正在靠近。\n【建議】過去的努力正在發酵。請心懷感恩地接受成果，並與身邊的人分享喜悅。"
+        // 11-40 條數據請在後續分批粘貼
     };
 
     function divine() {
@@ -66,7 +71,6 @@
         document.getElementById('result-box').style.display = 'block';
     }
 
-    // 分享功能
     function shareFB() {
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent("我在【辛言解憂站】得到了一份心靈啟示，推薦給您。");
