@@ -3,94 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>辛言解憂站 | 金蓮花頻率感應</title>
+    <title>辛言解憂站 | 賽博靈數感應</title>
     <style>
         :root { --gold: #D1A75D; --bg: #05070A; }
-        body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .container { text-align: center; background: rgba(15, 18, 24, 0.98); padding: 40px 25px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.8); width: 100%; max-width: 420px; }
+        body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .container { text-align: center; background: rgba(15, 18, 24, 0.98); padding: 30px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
         nav { display: flex; justify-content: space-around; margin-bottom: 25px; border-bottom: 1px solid rgba(209, 167, 93, 0.2); padding-bottom: 10px; }
-        nav a { color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: bold; }
-        .logo-img { width: 90px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--gold)); }
+        nav a { color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: bold; opacity: 0.8; transition: 0.3s; }
+        nav a:hover { opacity: 1; text-shadow: 0 0 8px var(--gold); }
+        .logo-img { width: 80px; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--gold)); }
         h1 { font-size: 1.4rem; letter-spacing: 4px; margin: 0; color: var(--gold); }
-        p.subtitle { font-size: 0.8rem; color: #666; margin-bottom: 25px; margin-top: 5px; }
-        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); border: 1px solid rgba(209,167,93,0.3); border-radius: 15px; padding: 18px; color: #fff; font-size: 1rem; text-align: center; margin-bottom: 20px; outline: none; }
+        p.subtitle { font-size: 0.8rem; color: #666; margin-bottom: 25px; }
+        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); border: 1px solid rgba(209, 167, 93, 0.5); border-radius: 15px; padding: 18px; color: #fff; font-size: 1.2rem; text-align: center; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(209, 167, 93, 0.2); }
         .btn-main { width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; padding: 16px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        #result-box { margin-top: 30px; display: none; padding: 25px; background: rgba(209, 167, 93, 0.03); border-radius: 20px; border: 1px solid rgba(209, 167, 93, 0.1); animation: fadeIn 0.8s forwards; text-align: left; }
-        .res-text { color: #efefef; line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; white-space: pre-line; }
-        .res-text b { color: var(--gold); }
-        .btn-fb { background: #1877F2; color: #fff; border: none; padding: 14px; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; }
-        .disclaimer { font-size: 0.7rem; color: #444; margin-top: 30px; line-height: 1.4; }
-        .nav-link { color: #888; text-decoration: none; font-size: 0.85rem; margin-top: 25px; display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-main:active { transform: scale(0.98); }
+        
+        #result-box { margin-top: 30px; display: none; padding: 25px; background: rgba(209, 167, 93, 0.05); border-radius: 20px; border: 1px solid var(--gold); text-align: left; line-height: 1.8; animation: fadeIn 0.6s ease-out; }
+        .gua-name { font-size: 1.3rem; font-weight: bold; color: var(--gold); border-bottom: 1px solid rgba(209, 167, 93, 0.3); padding-bottom: 10px; margin-bottom: 15px; text-align: center; }
+        .res-meaning { font-size: 1rem; color: #eee; margin-bottom: 20px; white-space: pre-line; }
+        .category { margin-top: 12px; font-size: 0.95rem; display: flex; align-items: flex-start; }
+        .category b { color: var(--gold); min-width: 65px; display: inline-block; }
+        .category span { color: #ddd; flex: 1; }
+        .advice-box { margin-top: 25px; padding-top: 15px; border-top: 1px dashed rgba(209, 167, 93, 0.3); font-style: italic; font-size: 0.9rem; color: #aaa; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <nav>
-        <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 臉書主頁</a>
         <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
+        <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 臉書主頁</a>
     </nav>
     <img src="icon.png" alt="Lotus" class="logo-img">
     <h1>解憂占卜站</h1>
-    <p class="subtitle">金蓮花能量頻率實驗室</p>
-    <input type="text" id="userInput" placeholder="輸入此刻困擾你的念頭、數字或狀況">
-    <button class="btn-main" onclick="calculate()">✨ 開啟感應頻率 ✨</button>
+    <p class="subtitle">金蓮花賽博靈數感應系統</p>
+    
+    <input type="number" id="numInput" placeholder="請輸入隨機數字 (如: 789)" pattern="\d*">
+    <button class="btn-main" onclick="divine()">✨ 啟動數理感應 ✨</button>
+
     <div id="result-box">
-        <div class="res-text" id="resDesc"></div>
-        <button class="btn-fb" onclick="shareToFB()">🔵 分享臉書 · 傳遞好運</button>
+        <div id="guaTitle" class="gua-name"></div>
+        <div id="resMeaning" class="res-meaning"></div>
+        <div class="category"><b>💼 事業：</b><span id="resWork"></span></div>
+        <div class="category"><b>❤️ 情感：</b><span id="resLove"></span></div>
+        <div class="category"><b>💰 財運：</b><span id="resMoney"></span></div>
+        <div class="category"><b>🏥 健康：</b><span id="resHealth"></span></div>
+        <div class="advice-box">💡 建議：<span id="resAdvice"></span></div>
     </div>
-    <div class="disclaimer">⚠️ 聲明：本工具僅供心靈啟發，不構成醫療、財務或法律建議。</div>
-    <a href="https://www.facebook.com/profile.php?id=61582018845158" target="_blank" class="nav-link">← 返回辛言解憂站 FB 專頁</a>
 </div>
 
 <script>
-    // 【維度 1：卦象意象】 - 8 組
-    const p1_list = ["【感應意象】\n此刻如枯木逢春，", "【感應意象】\n目前如明月照路，", "【感應意象】\n此刻如火中生蓮，", "【感應意象】\n目前如水順自然，", "【感應意象】\n此刻如金光入命，", "【感應意象】\n目前如雷霆萬鈞，", "【感應意象】\n此刻如深潭靜水，", "【感應意象】\n目前如春風拂面，"];
+    const bajiNames = ["坤為地", "乾為天", "兌為澤", "離為火", "震為雷", "巽為風", "坎為水", "艮為山"];
     
-    // 【維度 2：能量現狀】 - 8 組 (涵蓋事業、愛情、財運、健康)
-    const p2_list = ["事業能量處於即將翻轉的奇點。", "情感頻率正經歷一場深層排毒。", "財富磁場顯示有貴人暗中觀察。", "身體機能正在啟動自我修復機制。", "舊有的阻礙模式正被劇烈瓦解。", "目前的氣場極度利於願景顯化。", "過去積累的因果能量正在顯現。", "內在的力量正在靜默中悄然滋長。"];
-    
-    // 【維度 3：關鍵轉機】 - 8 組
-    const p3_list = ["\n【關鍵轉機】\n一個看似阻礙的驚喜即將出現。", "感情中某個被你忽略的細節是解藥。", "放下對財富的執著，契機反而降臨。", "這場小恙其實是為您擋掉了更大的災。", "與其向外求索，不如回歸本心。 ", "果斷的切割將帶來全新的事業生機。", "低調的積累會引發質變的翻身機會。", "真誠的溝通將化解一切陳年舊疾。"];
-    
-    // 【維度 4：行動建議】 - 8 組
-    const p4_list = ["\n\n💡 建議：此刻不宜大舉進攻，穩住陣腳即是盈利。", "💡 建議：今晚早睡泡腳，夢境會帶給你直接指引。", "💡 建議：對於任何財務投資，請務必再三審視細節。", "💡 建議：多與能量正向的朋友交流，避開情感誤區。", "💡 建議：保持情緒如如不動，這是目前最強的防禦。", "💡 建議：飲食宜溫補清淡，身體恢復後直覺會更敏銳。", "💡 建議：執行力是關鍵，想到什麼就立刻動手優化。", "💡 建議：保持感恩之心，好運將透過分享成倍增長。"];
+    const guaData = {
+        "乾為天": { 
+            m: "乾者健也。純陽剛建，充滿生機與領導力。目前正處於能量最強盛的巔峰期。", 
+            w: "名利雙收，有晉升之象，宜主動出擊，展現才華。", 
+            l: "感情熱烈但需注意性格過於剛強，易生口角，宜溫柔待之。", 
+            mny: "財運極佳，多來源於正職或遠方貿易，利於開拓市場。", 
+            h: "需注意頭部、肺部及過度勞累導致的血壓問題。", 
+            a: "滿招損，謙受益。保持自信的同時，務必戒驕戒躁。" 
+        },
+        "坤為地": { 
+            m: "坤者順也。厚德載物，柔順包容。目前能量處於靜止修復期，宜守不宜進。", 
+            w: "適合輔佐他人，不宜強出頭。在穩定的環境中默默耕耘必有收穫。", 
+            l: "感情穩定平順，如同大地般包容。適宜談婚論嫁或修復關係。", 
+            mny: "財運平穩，宜積蓄、購置不動產，不宜進行高風險投機。", 
+            h: "注意脾胃、消化系統及腹部健康，宜清淡飲食。", 
+            a: "靜觀其變，以柔克剛。等待是目前最好的策略。" 
+        },
+        "坎為水": { 
+            m: "坎者險也。重重困境，如水入深淵。這是一個考驗耐性與誠信的低迷期。", 
+            w: "事業遭遇瓶頸或陷入明爭暗鬥。宜堅守本分，等待水位退去。", 
+            l: "情感多波折，易有隱瞞或猜忌。需真誠對待，切莫玩弄感情。", 
+            mny: "財運受阻，防陷入合同糾紛或錢財受損，絕對不宜借貸。", 
+            h: "防範腎臟、膀胱、血液循環及感冒受涼。", 
+            a: "隨方就圓，保持內心的平靜與正念，必能安然度過。" 
+        },
+        "離為火": { 
+            m: "離者麗也。明亮華麗，但也虛而不實。目前能量極具傳播力，利於成名。", 
+            w: "創意爆發，利於公關、宣傳與藝術創作。事業光芒萬丈。", 
+            l: "感情熱烈如火，但容易忽冷忽熱，需警惕「露水情緣」。", 
+            mny: "表面風光但花費大，需注意收支平衡，防範文書、合約疏漏。", 
+            h: "注意心臟、眼目、肝火旺盛及情緒波動引起的失眠。", 
+            a: "保持清醒，切莫被虛榮心蒙蔽，務實才能長久。" 
+        },
+        "震為雷": { 
+            m: "震者動也。驚雷響動，震撼大地。目前正處於變動與新機會的開端。", 
+            w: "事業有突發性變動或新契機。宜隨機應變，抓住轉瞬即逝的機會。", 
+            l: "感情生活中常有意外驚喜或小衝突。需控制情緒，避免衝動。", 
+            mny: "財運波動較大，有意外之財，但也可能因決策太快而失財。", 
+            h: "注意肝臟、神經系統及腿部受傷，防範過度驚嚇。", 
+            a: "動中求勝，但要思慮周全，莫讓情緒左右行為。" 
+        },
+        "巽為風": { 
+            m: "巽者入也。如風隨物，無孔不入。代表滲透與反覆，目前需靈活行事。", 
+            w: "事業利於多角化經營或小規模擴張。凡事不宜急功近利。", 
+            l: "感情如同春風，溫和但立場不夠堅定。需防範感情上的猶豫不決。", 
+            mny: "細水長流，利於小額獲利。經商者利市三倍，利於女性生意。", 
+            h: "注意呼吸系統、氣管、內分泌及大腿肌肉健康。", 
+            a: "順應大勢，柔和待人。聽取長輩或女性貴人的建議。" 
+        },
+        "艮為山": { 
+            m: "艮者止也。重山相疊，進退維谷。目前能量處於完全停滯狀態，宜靜思。", 
+            w: "事業受阻，宜停止不必要的擴展。現在是反省與學習的最佳時機。", 
+            l: "感情陷入冷戰或僵局。建議給予彼此空間，強求無益。", 
+            mny: "財富停滯不前。不宜投資、不宜變動職位。守住本金為重。", 
+            h: "注意關節、脊椎、手部及筋骨疼痛，防止跌打損傷。", 
+            a: "止其所當止。在停止中修煉內心，等待能量重生。" 
+        },
+        "兌為澤": { 
+            m: "兌者說也。喜悅順利，如同湖水滋潤。目前處於社交與快樂的能量場。", 
+            w: "利於談判、商務洽談及服務業。口才與人脈是目前最大的優勢。", 
+            l: "感情甜蜜，多有溝通交流的機會。單身者有望在社交場合脫單。", 
+            mny: "財運穩步上升，因口舌生財或人緣帶財。利於合作分成。", 
+            h: "注意口腔、牙齒、肺部及咽喉不適，防範小手術。", 
+            a: "和氣生財，笑口常開。注意言多必失，謹防口舌是非。" 
+        }
+    };
 
-    function calculate() {
-        const input = document.getElementById('userInput').value.trim();
-        if (!input) { alert("請輸入感應文字。"); return; }
+    function divine() {
+        const val = document.getElementById('numInput').value.trim();
+        if (!val) { alert("請輸入數字以連結感應。"); return; }
+        
+        // 核心邏輯：取末尾數字感應主卦，確保不同數字對應不同卦象
+        const num = parseInt(val);
+        const index = (num % 8); // 0-7 對應八卦
+        
+        const guaName = bajiNames[index];
+        const data = guaData[guaName];
+
+        document.getElementById('guaTitle').innerText = `【感應卦象：${guaName}】`;
+        document.getElementById('resMeaning').innerText = data.m;
+        document.getElementById('resWork').innerText = data.w;
+        document.getElementById('resLove').innerText = data.l;
+        document.getElementById('resMoney').innerText = data.mny;
+        document.getElementById('resHealth').innerText = data.h;
+        document.getElementById('resAdvice').innerText = data.a;
         
         const resBox = document.getElementById('result-box');
-        const resDesc = document.getElementById('resDesc');
-
-        // 【核心算法】使用四個不同的種子，產生 4,096 種組合
-        let seed = input + new Date().toLocaleDateString();
-        let h1=0, h2=0, h3=0, h4=0;
-        for (let i = 0; i < seed.length; i++) {
-            let char = seed.charCodeAt(i);
-            h1 = ((h1 << 5) - h1) + char;
-            h2 = ((h2 << 7) - h2) + char; // 增加位移差異，拉開間距
-            h3 = ((h3 << 3) - h3) + char;
-            h4 = ((h4 << 1) - h4) + char;
-        }
-
-        const s1 = p1_list[Math.abs(h1) % 8];
-        const s2 = p2_list[Math.abs(h2) % 8];
-        const s3 = p3_list[Math.abs(h3) % 8];
-        const s4 = p4_list[Math.abs(h4) % 8];
-
-        resDesc.innerHTML = `<b>金蓮花感應啟示：</b>\n\n${s1}${s2}${s3}${s4}`;
         resBox.style.display = 'block';
         
-        setTimeout(() => { resBox.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
-    }
-
-    function shareToFB() {
-        const url = encodeURIComponent(window.location.href);
-        const quote = encodeURIComponent("我在【辛言解憂站】領取了專屬金蓮花啟示，感應頻率非常準確！分享接好運！✨");
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
+        // 平滑滾動到結果
+        setTimeout(() => {
+            resBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
     }
 </script>
+
 </body>
 </html>
