@@ -3,38 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>辛言解憂站 | 賽博靈數感應</title>
+    <title>辛言解憂站 - 賽博靈數</title>
     <style>
-        :root { --gold: #D1A75D; --bg: #05070A; --card: rgba(209, 167, 93, 0.05); }
-        body { background: var(--bg); color: var(--gold); font-family: "Microsoft JhengHei", sans-serif; display: flex; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .container { text-align: center; background: rgba(15, 18, 24, 0.98); padding: 30px; border-radius: 28px; border: 1px solid rgba(209, 167, 93, 0.3); width: 100%; max-width: 440px; }
-        nav { display: flex; justify-content: space-around; margin-bottom: 25px; border-bottom: 1px solid rgba(209, 167, 93, 0.1); padding-bottom: 15px; }
-        nav a { color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: bold; }
-        .logo-img { width: 80px; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--gold)); }
-        h1 { font-size: 1.5rem; letter-spacing: 3px; margin: 0; }
-        .subtitle { color: #666; font-size: 0.8rem; margin-bottom: 25px; }
-        input { width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.03); border: 1px solid var(--gold); border-radius: 15px; padding: 18px; color: #fff; font-size: 1.2rem; text-align: center; margin-bottom: 20px; outline: none; }
-        .btn-main { width: 100%; background: linear-gradient(45deg, #D1A75D, #B8860B); color: #000; border: none; padding: 18px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        #result-box { display: none; margin-top: 30px; padding: 25px; background: var(--card); border-radius: 20px; border: 1px solid var(--gold); text-align: left; line-height: 1.8; animation: fadeIn 0.8s; }
-        .gua-name { font-size: 1.3rem; font-weight: bold; color: var(--gold); text-align: center; margin-bottom: 15px; border-bottom: 1px dotted var(--gold); padding-bottom: 10px; }
-        .section-title { color: var(--gold); font-weight: bold; margin-top: 15px; display: block; border-left: 3px solid var(--gold); padding-left: 8px; }
-        .res-text { color: #eee; font-size: 0.95rem; margin-bottom: 10px; }
-        .btn-fb { background: #1877F2; color: #fff; border: none; padding: 16px; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 25px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        .footer-link { display: block; margin-top: 30px; color: #666; text-decoration: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #30363d; padding: 20px; border-radius: 15px; background: #161b22; }
+        img { width: 100px; border-radius: 50%; margin-bottom: 10px; }
+        input { width: 80%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #30363d; background: #0d1117; color: white; text-align: center; font-size: 1.1em; }
+        .btn-main { background: linear-gradient(45deg, #d4af37, #b8860b); color: #0d1117; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 90%; }
+        #result-box { margin-top: 20px; padding: 15px; border: 1px solid #d4af37; border-radius: 10px; display: none; text-align: left; }
+        .gua-name { color: #d4af37; font-size: 1.4em; font-weight: bold; margin-bottom: 10px; text-align: center; }
+        .section-title { color: #8b949e; font-size: 0.9em; margin-top: 10px; display: block; }
+        .res-text { font-size: 1.05em; line-height: 1.6; }
+        .btn-fb { background: #1877f2; color: white; border: none; padding: 8px 15px; border-radius: 20px; margin-top: 15px; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <nav>
-        <a href="https://axmy13.github.io/tarot-/">🔮 靈境塔羅</a>
-        <a href="https://www.facebook.com/profile.php?id=61582018845158">🏠 臉書主頁</a>
-    </nav>
-    <img src="icon.png" alt="Lotus" class="logo-img">
-    <h1>解憂占卜站</h1>
-    <p class="subtitle">金蓮花 · 賽博靈數精確感應系統</p>
-    <input type="number" id="numInput" placeholder="輸入隨機三位數字" pattern="\d*">
+    <img src="https://via.placeholder.com/100/0d1117/d4af37?text=Lotus" alt="Logo">
+    <h2>解憂占卜站</h2>
+    <p style="color: #8b949e;">金蓮花賽博靈數感應系統</p>
+    <input type="number" id="numInput" placeholder="輸入3位靈數 (如 103)">
     <button class="btn-main" onclick="divine()">✨ 啟動數理感應 ✨</button>
+
     <div id="result-box">
         <div id="guaTitle" class="gua-name"></div>
         <span class="section-title">【卦象原文】</span>
@@ -45,39 +36,28 @@
         <div id="resAdvice" class="res-text"></div>
         <button class="btn-fb" onclick="shareFB()">🔵 分享臉書 · 傳遞好運</button>
     </div>
-    <a href="https://www.facebook.com/profile.php?id=61582018845158" class="footer-link">← 返回辛言解憂站 FB 專頁</a>
 </div>
 
 <script>
     const guaNames = ["", "乾天", "兌澤", "離火", "震雷", "巽風", "坎水", "艮山", "坤地"];
-    
-    // 這裡就是數據插槽，我們會分批填入 384 爻
-    const yaoDict = {
-        // 第一組：1-8 卦
-        "11": { n: "乾為天", o: "乾，元亨利貞。", y: ["", "初九：潛龍勿用。", "九二：見龍在田，利見大人。", "九三：君子終日乾乾，夕惕若，厲無咎。", "九四：或躍在淵，無咎。", "九五：飛龍在天，利見大人。", "上九：亢龍有悔。"], a: "目前能量極強，但需注意盛極必衰，謙遜方能長久。" },
-        "88": { n: "坤為地", o: "坤，元亨，利牝馬之貞。", y: ["", "初六：履霜，堅冰至。", "六二：直方大，不習無不利。", "六三：含章可貞，或從王事，無成有終。", "六四：括囊，無咎無譽。", "六五：黃裳，元吉。", "上六：龍戰於野，其血玄黃。"], a: "宜守不宜進，像大地一樣包容萬物，靜待時機。" },
-        "64": { n: "水雷屯", o: "屯，元亨利貞，勿用有攸往，利建侯。", y: ["", "初九：磐桓，利居貞，利建侯。", "六二：屯如邅如，乘馬班如。匪寇婚媾。", "六三：即鹿無虞，惟入於林中。", "六四：乘馬班如，求婚媾，往吉，無不利。", "九五：屯其膏，小貞吉，大貞凶。", "上六：乘馬班如，泣血漣如。"], a: "萬事起頭難，目前的困頓是為了未來的壯大，請保持耐心。" },
-        "76": { n: "山水蒙", o: "蒙，亨。匪我求童蒙，童蒙求我。", y: ["", "初六：發蒙，利用刑人，用說桎梏。", "九二：包蒙吉，納婦吉，子克家。", "六三：勿用取女，見金夫，不有躬。", "六四：困蒙，吝。", "六五：童蒙，吉。", "上九：擊蒙，不利為寇，利御寇。"], a: "處於迷茫期，宜虛心求教，開啟智慧，不宜盲目決策。" },
-        "61": { n: "水天需", o: "需，有孚，光亨，貞吉。利涉大川。", y: ["", "初九：需於郊，利用恆，無咎。", "九二：需於沙，小有言，終吉。", "九三：需於泥，致寇至。", "六四：需於血，出自穴。", "九五：需於酒食，貞吉。", "上六：入於穴，有不速之客三人來。"], a: "需要等待時機，此時不宜焦慮，在等待中積蓄能量。" },
-        "16": { n: "天水訟", o: "訟，有孚，窒惕，中吉，終凶。", y: ["", "初六：不永所事，小有言，終吉。", "九二：不克訟，歸而逋，其邑人三百戶，無眚。", "六三：食舊德，貞厲，終吉。", "九四：不克訟，復即命，渝安貞，吉。", "九五：訟，元吉。", "上九：或錫之鞶帶，一朝三褫之。"], a: "慎防爭端與口舌。退一步海闊天空，強求爭勝必有後患。" },
-        "86": { n: "地水師", o: "師，貞，丈人吉，無咎。", y: ["", "初六：師出以律，失律凶。", "九二：在師中，吉無咎，王三錫命。", "六三：師或輿屍，凶。", "六四：師左次，無咎。", "六五：田有禽，利執言，無咎。", "上六：大君有命，開國承家，小人勿用。"], a: "功成名就之時，賞罰需分明，尤其要遠離小人的影響。" },
-        "68": { n: "水地比", o: "比，吉。原筮，元永貞，無咎。", y: ["", "初六：有孚比之，無咎。", "六二：比之自內，貞吉。", "六三：比之匪人。", "六四：外比之，貞吉。", "九五：顯比，王用三驅，失前禽。", "上六：比之無首，凶。"], a: "利於尋求合作，與志同道合者同行，但需防範隨大流而迷失。" }，        // 第二組：9-16 卦
-        "51": { n: "風天小畜", o: "小畜，亨。密雲不雨，自我西郊。", y: ["", "初九：復自道，何其咎，吉。", "九二：牽復，吉。", "九三：輿說輻，夫妻反目。", "六四：有孚，血去惕出，無咎。", "九五：有孚攣如，富以其鄰。", "上九：既雨既處，尚德載，婦貞厲。"], a: "力量尚微，不宜急進。累積小的成功，終能成就大事。" },
-        "12": { n: "天澤履", o: "履虎尾，不咥人，亨。", y: ["", "初九：素履，往無咎。", "九二：履道坦坦，幽人貞吉。", "六三：眇能視，跛能履，履虎尾，咥人，凶。", "九四：履虎尾，愬愬終吉。", "九五：夬履，貞厲。", "上九：視履考祥，其旋元吉。"], a: "如履薄冰，需謹言慎行。遵循禮儀與規則，方能化險為夷。" },
-        "81": { n: "地天泰", o: "泰，小往大來，吉亨。", y: ["", "初九：拔茅茹，以其匯，征吉。", "九二：包荒，用馮河，不遐遺，朋亡，得尚於中行。", "九三：無平不陂，無往不復，艱貞無咎。", "六四：翩翩，不富以其鄰，不戒以孚。", "六五：帝乙歸妹，以祉元吉。", "上六：城復於隍，勿用師。"], a: "陰陽調和，萬事亨通。這是發展的黃金期，但要預防隱藏的變數。" },
-        "18": { n: "天地否", o: "否之匪人，不利君子貞，大往小來。", y: ["", "初六：拔茅茹，以其匯，貞吉亨。", "六二：包承。小人吉，大人否亨。", "六三：包羞。", "九四：有命無咎，疇離祉。", "九五：休否，大人吉。", "上九：傾否，先否後喜。"], a: "局勢不順，溝通受阻。此時宜守拙避世，等待黑暗過去。" },
-        "13": { n: "天火同人", o: "同人於野，亨。利涉大川，利君子貞。", y: ["", "初九：同人於門，無咎。", "六二：同人於宗，吝。", "九三：伏戎於莽，升其高陵，三歲不興。", "九四：乘其墉，弗克攻，吉。", "九五：同人先號咷而後笑。", "上九：同人於郊，無悔。"], a: "利於團隊協作與社交。公開透明地與人合作，能集思廣益。" },
-        "31": { n: "火天大有", o: "大有，元亨。", y: ["", "初九：無交害，匪咎，艱則無咎。", "九二：大車以載，有攸往，無咎。", "九三：公用亨於天子，小人弗克。", "九四：匪其彭，無咎。", "六五：厥孚交如，威如，吉。", "上九：自天佑之，吉無不利。"], a: "收穫豐盛，運勢極佳。但需謙遜分利，才能長久保有財富。" },
-        "87": { n: "地山謙", o: "謙，亨，君子有終。", y: ["", "初六：謙謙君子，用涉大川，吉。", "六二：鳴謙，貞吉。", "九三：勞謙君子，有終吉。", "六四：無不利，撝謙。", "六五：不富以其鄰，利用侵伐，無不利。", "上六：鳴謙，利用行師，征邑國。"], a: "謙受益，滿招損。越是成功越要低調，這是保護自己的最佳方式。" },
-                  "48": { n: "雷地豫", o: "豫，利建侯行師。", y: ["", "初六：鳴豫，凶。", "六二：介於石，不終日，貞吉。", "六三：盱豫，悔。遲有悔。", "九四：由豫，大有得。勿疑。朋盍簪。", "六五：貞疾，恆不死。", "上六：冥豫，成有渝，無悔。"], a: "順應時勢，心情愉悅。利於策劃與慶典，但需防沉溺於安樂。" }，    function shareFB() {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent("我在辛言解憂站求得一卦，感應非常準確！");
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
-    }
-</script>
-</body>
-</html>
 
+    const yaoDict = {
+        "11": { n: "乾為天", o: "乾，元亨利貞。", y: ["", "初九：潛龍勿用。", "九二：見龍在田。", "九三：君子終日乾乾。", "九四：或躍在淵。", "九五：飛龍在天。", "上九：亢龍有悔。"], a: "能量極強，但需戒驕戒躁，等待時機成熟。" },
+        "88": { n: "坤為地", o: "坤，元亨，利牝馬之貞。", y: ["", "初六：履霜，堅冰至。", "六二：直方大，不習無不利。", "六三：含章可貞。", "六四：括囊，無咎。", "六五：黃裳，元吉。", "上六：龍戰於野。"], a: "厚德載物。目前適合包容與配合，不宜強出頭。" },
+        "64": { n: "水雷屯", o: "屯，元亨利貞。勿用有攸往。", y: ["", "初九：磐桓，利居貞。", "六二：屯如邅如。", "六三：即鹿無虞，惟入於林中。", "六四：乘馬班如，求婚媾。", "九五：屯其膏。", "上六：乘馬班如，泣血漣如。"], a: "萬事起頭難。目前的困頓是為了未來的壯大，請保持耐心。" },
+        "76": { n: "山水蒙", o: "蒙，亨。匪我求童蒙，童蒙求我。", y: ["", "初六：發蒙，利用刑人。", "九二：包蒙，吉。", "六三：勿用取女。", "六四：困蒙，吝。", "六五：童蒙，吉。", "上六：擊蒙。"], a: "處於迷茫期，宜虛心求教，開啟智慧，不宜盲目決策。" },
+        "61": { n: "水天需", o: "需，有孚，光亨，貞吉。", y: ["", "初九：需於郊。", "九二：需於沙。", "九三：需於泥。", "六四：需於血。", "九五：需於酒食。", "上六：入於穴。"], a: "等待時機。此時不宜焦慮，在等待中積蓄能量。" },
+        "16": { n: "天水訟", o: "訟，有孚，窒惕，中吉，終凶。", y: ["", "初六：不永所事。", "九二：不克訟。", "六三：食舊德。", "九四：不克訟，復即命。", "九五：訟，元吉。", "上六：或錫之鞶帶。"], a: "慎防爭端與口舌。退一步海闊天空，強求爭勝必有後患。" },
+        "86": { n: "地水師", o: "師，貞，丈人吉，無咎。", y: ["", "初六：師出以律。", "九二：在師中，吉。", "六三：師或輿屍。", "六四：師左次。", "六五：田有禽。", "上六：大君有命。"], a: "需要組織與紀律。目前的挑戰需統籌規劃，尤其要遠離小人的影響。" },
+        "68": { n: "水地比", o: "比，吉。原筮，元永貞，無咎。", y: ["", "初六：有孚比之。", "六二：比之自內。", "六三：比之匪人。", "六四：外比之。", "九五：顯比。", "上六：比之無首。"], a: "尋求合作與親和。團結身邊的人，但要預防隱藏的變數。" },
+        "51": { n: "風天小畜", o: "小畜，亨。密雲不雨。", y: ["", "初九：復自道。", "九二：牽復，吉。", "九三：輿說輻。", "六四：有孚，血去惕出。", "九五：有孚攣如。", "上六：既雨既處。"], a: "積累小的成功。目前力量尚不足以成就大事，宜細水長流。" },
+        "12": { n: "天澤履", o: "履虎尾，不咥人，亨。", y: ["", "初九：素履，往無咎。", "九二：履道坦坦。", "六三：眇能視，跛能履。", "九四：履虎尾，愬愬終吉。", "九五：夬履，貞厲。", "上九：視履考祥。"], a: "遵循禮儀與規則。即便如履薄冰，方能化險為夷。" },
+        "81": { n: "地天泰", o: "泰，小往大來，吉亨。", y: ["", "初九：拔茅茹，以其匯。", "九二：包荒，用馮河。", "九三：無平不陂。", "六四：翩翩，不富以其鄰。", "六五：帝乙歸妹。", "上六：城復於隍。"], a: "陰陽調和，萬事亨通。這是發展的黃金期，要好好把握。" },
+        "18": { n: "天地否", o: "否之匪人，不利君子貞。", y: ["", "初六：拔茅茹，以其匯。", "六二：包承，小人吉。", "六三：包羞。", "九四：有命無咎。", "九五：休否，大人吉。", "上九：傾否。"], a: "溝通阻塞，形勢壓抑。宜堅守底線，等待黑暗過去。" },
+        "13": { n: "天火同人", o: "同人於野，亨。利涉大川。", y: ["", "初九：同人於門。", "六二：同人於宗。", "九三：伏戎於莽。", "九四：乘其墉，弗克攻。", "九五：同人先號咷而後笑。", "上九：同人於郊。"], a: "公開透明地與人合作。能集思廣益，利於成就大業。" },
+        "31": { n: "火天大有", o: "大有，元亨。", y: ["", "初九：無交害。", "九二：大車以載。", "九三：公用亨於天子。", "九四：匪其彭。", "六五：厥孚交如。", "上九：自天佑之。"], a: "收穫豐碩。此時利於長久保有財富，但需謙遜分利。" },
+        "87": { n: "地山謙", o: "謙，亨，君子有終。", y: ["", "初六：謙謙君子。", "六二：鳴謙，貞吉。", "九三：勞謙君子。", "六四：無不利，撝謙。", "六五：不富以其鄰。", "上六：鳴謙，利用行師。"], a: "成功越要低調。這是保護自己的最佳方式。" },
+        "48": { n: "雷地豫", o: "豫，利建侯行師。", y: ["", "初六：鳴豫，凶。", "六二：介於石，不終日，貞吉。", "六三：盱豫，悔。", "九四：由豫，大有得。", "六五：貞疾，恆不死。", "上六：冥豫，成有渝。"], a: "順應時勢，心情愉悅。利於策劃與慶典，但需防沉溺於安樂。" }
     };
 
     function divine() {
@@ -99,7 +79,7 @@
         document.getElementById('result-box').style.display = 'block';
     }
 
-        function shareFB() {
+    function shareFB() {
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent("我在辛言解憂站求得一卦，感應非常準確！");
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
