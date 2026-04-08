@@ -322,12 +322,15 @@ de<!DOCTYPE html>
         "280": "【感應】這是一個關於「圓滿達成」的小結點。\n【建議】慶祝您已經錄入了 280 條智慧。這份耐心本身就是一種極大的修行與能量。"
 
 };
-    function divine() {
+        function divine() {
         const val = document.getElementById('numInput').value;
         if (!val) return;
         const index = (parseInt(val) % 384) || 384;
         const result = oracleDict[index] || "感應正在傳輸中，請稍後刷新試試...";
-        document.getElementById('oracleHeader').innerText = `感應序號：${index}`;
+        
+        // 這裡修改了顯示文字，讓讀者看到轉化過程
+        document.getElementById('oracleHeader').innerText = `訊號 ${val} ➔ 感應序號：${index}`;
+        
         document.getElementById('oracleContent').innerText = result;
         document.getElementById('result-box').style.display = 'block';
     }
