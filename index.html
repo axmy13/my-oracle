@@ -23,6 +23,19 @@
         .btn-fb-share { background: #1877f2; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; flex: 1; font-size: 0.85em; font-weight: bold; }
         .btn-home { background: #30363d; color: #c9d1d9; border: none; padding: 10px; border-radius: 5px; cursor: pointer; flex: 1; font-size: 0.85em; text-decoration: none; text-align: center; }
         .disclaimer { font-size: 0.75em; color: #8b949e; margin-top: 15px; line-height: 1.4; }
+        /* 按鈕增加懸停發光 */
+.btn-main:hover {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+/* 輸入框選中時發光 */
+input:focus {
+    outline: none;
+    border-color: #ffca28 !important;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
     </style>
 </head>
 
