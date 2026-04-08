@@ -432,15 +432,7 @@
         "384": "【感應】萬物歸宗，這是 384 爻的圓滿終點。\n【建議】拿起一本一直想看但沒看的書。書中的某個段落，可能會觸發您解決問題的靈感。"
 
 };
-        function divine() {
-        const val = document.getElementById('numInput').value;
-        if (!val) return;
-        const index = (parseInt(val) % 384) || 384;
-        const result = oracleDict[index] || "感應正在傳輸中，請稍後刷新試試...";
-        
-        // 這裡修改了顯示文字，讓讀者看到轉化過程
-        document.getElementById('oracleHeader').innerText = `訊號 ${val} ➔ 感應序號：${index}`;
-        
+                document.getElementById('oracleHeader').innerText = `輸入數：${val} → 感應序號：${index}`;
         document.getElementById('oracleContent').innerText = result;
         document.getElementById('result-box').style.display = 'block';
     }
