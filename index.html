@@ -432,15 +432,29 @@
         "384": "【感應】萬物歸宗，這是 384 爻的圓滿終點。\n【建議】拿起一本一直想看但沒看的書。書中的某個段落，可能會觸發您解決問題的靈感。"
 
 };
-                document.getElementById('oracleHeader').innerText = `輸入數：${val} → 感應序號：${index}`;
+                    function divine() {
+        const val = document.getElementById('numInput').value;
+        if (!val) {
+            alert("請先輸入數字");
+            return;
+        }
+        
+        // 核心邏輯：計算 384 爻序號
+        const index = (parseInt(val) % 384) || 384;
+        const result = oracleDict[index] || "感應正在傳輸中...";
+
+        // 將結果寫入網頁元素 [解決錯誤 2]
+        document.getElementById('oracleHeader').innerText = "輸入數：" + val + " → 感應序號：" + index;
         document.getElementById('oracleContent').innerText = result;
+        
+        // 顯示結果框
         document.getElementById('result-box').style.display = 'block';
     }
 
     function shareFB() {
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent("我在【辛言解憂站】得到了一份心靈啟示，推薦給您。");
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + url + "&quote=" + text, "_blank");
     }
 </script>
 </body>
